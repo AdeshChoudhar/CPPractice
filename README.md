@@ -1,2 +1,1 @@
-# CP
-Competitive Programming
+# CPPractice
