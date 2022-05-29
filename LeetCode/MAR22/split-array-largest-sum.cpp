@@ -1,10 +1,10 @@
 //
-// Created by adeshchoudhar on 01/04/22.
+// Created by adeshchoudhar on 31/03/22.
 //
 
 class Solution {
 public:
-    int splitArray(vector<int> &nums, int m) {
+    int splitArray(vector<int>& nums, int m) {
         int l = 0, r = 0, n = nums.size();
         for (int i = 0; i < n; ++i) l = max(l, nums[i]), r += nums[i];
 
