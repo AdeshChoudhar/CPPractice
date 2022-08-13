@@ -13,7 +13,7 @@ public:
             int mid = l + (r - l) / 2;
             bool flag = false;
             for (int i = 0; i < s.size() - mid + 1; i++) {
-                const auto[it, inserted] = us.emplace(s.data() + i, mid);
+                const auto [it, inserted] = us.emplace(s.data() + i, mid);
                 if (!inserted) {
                     flag = true;
                     sv = *it;

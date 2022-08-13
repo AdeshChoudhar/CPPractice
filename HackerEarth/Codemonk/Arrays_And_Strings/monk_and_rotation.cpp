@@ -32,14 +32,19 @@ void solve()
         cin >> A[i];
     }
 
+    vector<int> ans;
     K %= N;
     for (int i = (N - K); i < N; i++)
     {
-        cout << A[i] << " ";
+        ans.push_back(A[i]);
     }
     for (int i = 0; i < (N - K); i++)
     {
-        cout << A[i] << " ";
+        ans.push_back(A[i]);
+    }
+    for (int x : ans)
+    {
+        cout << x << " ";
     }
     cout << endl;
 }

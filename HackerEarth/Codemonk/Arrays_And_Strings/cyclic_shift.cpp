@@ -29,8 +29,9 @@ void solve()
     string A;
     cin >> A;
 
-    string B = "";
-    ll ans = 0, tmp = -1;
+    ll ans = 0;
+    ll tmp = -1;
+    string B;
     for (int i = 0; i < N; i++)
     {
         if (B < A)

@@ -32,8 +32,8 @@ void solve()
         cin >> A[i];
     }
 
-    sort(A.begin(), A.end());
     int ans = INT_MAX;
+    sort(A.begin(), A.end());
     for (int i = 0; i < (N - 1); i++)
     {
         ans = min(ans, A[i] ^ A[i + 1]);

@@ -4,7 +4,7 @@
 
 class Solution {
 public:
-    int splitArray(vector<int>& nums, int m) {
+    int splitArray(vector<int> &nums, int m) {
         int l = 0, r = 0, n = nums.size();
         for (int i = 0; i < n; ++i) l = max(l, nums[i]), r += nums[i];
 
