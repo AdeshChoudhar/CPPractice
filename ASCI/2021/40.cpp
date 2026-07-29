@@ -1,68 +1,35 @@
-// Problem: Rows with max 1s
+//
+// Problem: Row with Max 1s in Rowwise Sorted
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+int solve(vector<vector<int>> &arr) {
+  int ans = -1;
 
-#define ll long long
-
-int solve(vector<vector<int>>, int, int);
-void printArray(string, vector<int>, int);
-
-int main()
-{
-    vector<vector<int>> matrix = {{0, 1, 1, 1},
-                                  {0, 0, 1, 1},
-                                  {1, 1, 1, 1},
-                                  {0, 0, 0, 0}};
-
-    cout << "INPUT(s):" << endl;
-    for (int i = 0, n = matrix.size(); i < n; i++)
-    {
-        if (i == 0)
-        {
-            printArray("matrix =", matrix[i], matrix[i].size());
-        }
-        else
-        {
-            printArray("        ", matrix[i], matrix[i].size());
-        }
+  int mxm = -1, cnt = 0, r = arr.size(), c = arr[0].size();
+  for (int i = 0; i < r; i++) {
+    cnt = count(arr[i].begin(), arr[i].end(), 1);
+    if (cnt > mxm) {
+      mxm = cnt;
+      ans = i;
     }
+  }
 
-    int ans = solve(matrix, matrix.size(), matrix[0].size());
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
 
-int solve(vector<vector<int>> matrix, int r, int c)
-{
-    int maxi = -1, R = -1, cnt = 0;
-    for (int i = 0; i < r; i++)
-    {
-        cnt = count(matrix[i].begin(), matrix[i].end(), 1);
-        if (cnt == 0)
-        {
-            continue;
-        }
-        if (cnt > maxi)
-        {
-            maxi = cnt;
-            R = i;
-        }
-    }
+int main() {
+  vector<vector<int>> arr = {
+      {0, 1, 1, 1}, {0, 0, 1, 1}, {1, 1, 1, 1}, {0, 0, 0, 0}};
 
-    return R;
-}
+  cout << "INPUT(s):" << endl;
+  printMatrix(arr, "  arr = ");
 
-void printArray(string s, vector<int> v, int n)
-{
-    cout << "\t" << s << " { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << v[i] << ", ";
-    }
-    cout << "}" << endl;
+  int ans = solve(arr);
+
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
+
+  return 0;
 }

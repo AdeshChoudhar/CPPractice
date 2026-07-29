@@ -1,53 +1,34 @@
+//
 // Problem: Count pairs with given sum
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+int solve(vector<int> &arr, int target) {
+  int ans = 0;
 
-#define ll long long
+  unordered_map<int, int> um;
 
-int solve(int[], int, int);
-void printArray(string, int[], int);
+  for (int i = 0, n = arr.size(); i < n; i++) {
+    ans += um[target - arr[i]];
+    um[arr[i]] += 1;
+  }
 
-int main()
-{
-    int arr[] = {1, 5, 7, 1};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int k = 6;
-
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, n);
-
-    int ans = solve(arr, n, k);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
 
-int solve(int arr[], int n, int k)
-{
-    int cnt = 0;
-    unordered_map<int, int> um;
-    for (int i = 0; i < n; i++)
-    {
-        if (um.find(k - arr[i]) != um.end())
-        {
-            cnt += um[k - arr[i]];
-        }
-        um[arr[i]] += 1;
-    }
+int main() {
+  vector<int> arr = {1, 5, 7, -1, 5};
+  int target = 6;
 
-    return cnt;
-}
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
+  cout << "  target = " << target << endl;
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  int ans = solve(arr, target);
+
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
+
+  return 0;
 }

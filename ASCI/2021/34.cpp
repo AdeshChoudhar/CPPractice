@@ -1,64 +1,44 @@
-// Problem: Palindromic array
+//
+// Problem: Palindromic Array
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+bool isPalinArrayUtil(int num) {
+  bool res;
 
-#define ll long long
+  int tmp = num, rev = 0;
 
-int solve(int[], int);
-bool palindrome(int);
-void printArray(string, int[], int);
+  while (tmp) {
+    rev = rev * 10 + tmp % 10;
+    tmp /= 10;
+  }
 
-int main()
-{
-    int arr[] = {111, 222, 333, 444, 555};
-    int n = sizeof(arr) / sizeof(arr[0]);
+  res = (num == rev);
 
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, n);
-
-    string ans = solve(arr, n) ? "Yes" : "No";
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return res;
 }
 
-int solve(int arr[], int n)
-{
-    int flag = 1;
-    for (int i = 0; i < n; i++)
-    {
-        if (!(palindrome(arr[i])))
-        {
-            flag = 0;
-            break;
-        }
-    }
+bool solve(vector<int> &arr) {
+  bool ans = true;
 
-    return flag;
+  for (int i = 0, n = arr.size(); (i < n) && ans; i++) {
+    ans = ans && (isPalinArrayUtil(arr[i]));
+  }
+
+  return ans;
 }
 
-bool palindrome(int n)
-{
-    int tmp = n, rev = 0;
-    while (tmp)
-    {
-        rev = rev * 10 + tmp % 10;
-        tmp /= 10;
-    }
+int main() {
+  vector<int> arr = {111, 222, 333, 444, 555};
 
-    return (n == rev);
-}
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  bool ans = solve(arr);
+
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << (ans ? "true" : "false") << endl;
+
+  return 0;
 }

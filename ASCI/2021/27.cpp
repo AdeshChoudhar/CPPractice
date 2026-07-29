@@ -1,65 +1,42 @@
-// Problem: Array subset of another array
+//
+// Problem: Array Subset
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+bool solve(vector<int> &a, vector<int> &b) {
+  bool ans = true;
 
-#define ll long long
+  unordered_map<int, int> um;
 
-string solve(int[], int[], int, int);
-void printArray(string, int[], int);
+  for (int i = 0, n = a.size(); i < n; i++) {
+    um[a[i]] += 1;
+  }
 
-int main()
-{
-    int a[] = {11, 1, 13, 21, 3, 7};
-    int b[] = {11, 3, 7, 1};
-    int n = sizeof(a) / sizeof(a[0]);
-    int m = sizeof(b) / sizeof(b[0]);
+  for (int i = 0, m = b.size(); i < m; i++) {
+    if (um[b[i]]) {
+      um[b[i]] -= 1;
+    } else {
+      ans = false;
+      return ans;
+    }
+  }
 
-    cout << "INPUT(s):" << endl;
-    printArray("a", a, n);
-    printArray("b", b, m);
-
-    string ans = solve(a, b, n, m);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
 
-string solve(int a[], int b[], int n, int m)
-{
-    unordered_map<int, int> mp;
-    for (int i = 0; i < n; i++)
-    {
-        mp[a[i]] += 1;
-    }
+int main() {
+  vector<int> a = {11, 7, 1, 13, 21, 3, 7, 3};
+  vector<int> b = {11, 3, 7, 1, 7};
 
-    bool flag = true;
-    for (int i = 0; i < m; i++)
-    {
-        if (mp[b[i]])
-        {
-            mp[b[i]] -= 1;
-        }
-        else
-        {
-            flag = false;
-            break;
-        }
-    }
+  cout << "INPUT(s):" << endl;
+  printVector(a, "  a = ");
+  printVector(b, "  b = ");
 
-    string s = (flag ? "Yes" : "No");
-    return s;
-}
+  bool ans = solve(a, b);
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << (ans ? "true" : "false") << endl;
+
+  return 0;
 }

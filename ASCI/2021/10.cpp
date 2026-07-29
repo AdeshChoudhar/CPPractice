@@ -1,55 +1,39 @@
-// Problem: Minimum number of jumps
+//
+// Problem: Minimum Jumps
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+int solve(vector<int> &arr) {
+  int ans = 0;
 
-int solve(int[], int);
-void printArray(string, int[], int);
+  int s = 0, e = 0;
+  for (int i = 0, n = arr.size(); i < (n - 1); i++) {
+    e = max(e, arr[i] + i);
+    if (i == s) {
+      s = e;
+      ans += 1;
+      if (e >= (n - 1)) {
+        break;
+      }
+    }
+  }
 
-int main()
-{
-    int arr[] = {1, 4, 3, 2, 6, 7};
-    int n = sizeof(arr) / sizeof(arr[0]);
+  ans = (ans == 0) ? -1 : ans;
 
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, n);
-
-    int ans = solve(arr, n);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
 
-int solve(int arr[], int n)
-{
-    if (n == 1)
-        return 0;
+int main() {
+  vector<int> arr = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};
 
-    int mini = INT_MAX;
-    for (int i = n - 2; i >= 0; i--)
-    {
-        if ((i + arr[i]) >= (n - 1))
-        {
-            int sub_mini = solve(arr, i + 1);
-            if (sub_mini != INT_MAX)
-            {
-                mini = min(mini, sub_mini + 1);
-            }
-        }
-    }
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
 
-    return mini;
-}
+  int ans = solve(arr);
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
+
+  return 0;
 }

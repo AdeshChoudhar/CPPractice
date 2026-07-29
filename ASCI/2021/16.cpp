@@ -1,67 +1,94 @@
-// Problem: Count inversions
+//
+// Problem: Count Inversions
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+class SegmentTree {
+public:
+  vector<int> seg;
 
-#define ll long long
+  SegmentTree(int n) { seg.resize(4 * n + 1); }
 
-ll int solve(ll[], ll);
-void printArray(string, ll[], int);
-
-int main()
-{
-    ll arr[] = {2, 4, 1, 3, 5};
-    ll N = sizeof(arr) / sizeof(arr[0]);
-
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, N);
-
-    ll int ans = solve(arr, N);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
-}
-
-ll int mergeSort(ll arr[], ll int left, ll int right)
-{
-    if (left >= right)
-    {
-        return 0;
+  void build(int idx, vector<int> &arr, int low, int hih) {
+    if (low == hih) {
+      seg[idx] = arr[low];
+      return;
     }
 
-    ll int mid = left + (right - left) / 2, i = left, j = mid + 1;
-    ll int c = mergeSort(arr, left, mid) + mergeSort(arr, mid + 1, right);
+    int mid = low + (hih - low) / 2;
+    build(2 * idx + 1, arr, low, mid);
+    build(2 * idx + 2, arr, mid + 1, hih);
+    seg[idx] = seg[2 * idx + 1] + seg[2 * idx + 2];
+  }
 
-    while (i <= mid)
-    {
-        while (j <= right && arr[i] > arr[j])
-        {
-            j++;
-        }
-
-        c += j - (mid + 1);
-        i++;
+  int query(int idx, int low, int hih, int l, int r) {
+    int res = 0;
+    if ((l <= low) && (hih <= r)) {
+      res = seg[idx];
+      return res;
     }
 
-    sort(arr + left, arr + right + 1);
-
-    return c;
-}
-
-ll int solve(ll arr[], ll N)
-{
-    return mergeSort(arr, 0, N - 1);
-}
-
-void printArray(string s, ll arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
+    if ((l > hih) || (low > r)) {
+      return res;
     }
-    cout << "}" << endl;
+
+    int mid = low + (hih - low) / 2;
+    int left = query(2 * idx + 1, low, mid, l, r);
+    int right = query(2 * idx + 2, mid + 1, hih, l, r);
+    res = left + right;
+
+    return res;
+  }
+
+  void update(int idx, int low, int hih, int cur, int val) {
+    if (low == hih) {
+      seg[idx] += val;
+      return;
+    }
+
+    int mid = low + (hih - low) / 2;
+    if (cur <= mid) {
+      update(2 * idx + 1, low, mid, cur, val);
+    } else {
+      update(2 * idx + 2, mid + 1, hih, cur, val);
+    }
+
+    seg[idx] = seg[2 * idx + 1] + seg[2 * idx + 2];
+  }
+};
+
+int solve(vector<int> &arr) {
+  int ans = 0;
+  int n = arr.size(), mxm = 1 + *max_element(arr.begin(), arr.end());
+
+  vector<int> fre(mxm, 0);
+  for (auto x : arr) {
+    fre[x] += 1;
+  }
+
+  SegmentTree st(mxm);
+  st.build(0, fre, 0, mxm - 1);
+
+  for (int i = 0; i < n; i++) {
+    fre[arr[i]] -= 1;
+    st.update(0, 0, mxm - 1, arr[i], -1);
+    ans += st.query(0, 0, mxm - 1, 1, arr[i] - 1);
+  }
+
+  return ans;
+}
+
+int main() {
+  vector<int> arr = {2, 4, 1, 3, 5};
+
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
+
+  int ans = solve(arr);
+
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
+
+  return 0;
 }

@@ -1,67 +1,60 @@
-// Problem: Median of two sorted arrays of different sizes
+//
+// Problem: Median of 2 Sorted Arrays of Different Sizes
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+double solve(vector<int> &a, vector<int> &b) {
+  double ans = 0;
 
-#define ll long long
+  int n1 = a.size(), n2 = b.size();
+  if (n1 > n2) {
+    ans = solve(b, a);
+    return ans;
+  }
 
-int solve(int[], int[], int, int);
-void printArray(string, int[], int);
+  int n = n1 + n2;
+  int mid = (n + 1) / 2;
+  int low = 0, hih = n1;
 
-int main()
-{
-    int a[] = {900};
-    int b[] = {5, 8, 10, 20};
+  while (low <= hih) {
+    int m1 = low + (hih - low) / 2;
+    int m2 = mid - m1;
 
-    int n = sizeof(a) / sizeof(a[0]);
-    int m = sizeof(b) / sizeof(b[0]);
+    int l1 = (m1 > 0) ? a[m1 - 1] : INT_MIN;
+    int l2 = (m2 > 0) ? b[m2 - 1] : INT_MIN;
+    int r1 = (m1 < n1) ? a[m1] : INT_MAX;
+    int r2 = (m2 < n2) ? b[m2] : INT_MAX;
 
-    cout << "INPUT(s):" << endl;
-    printArray("a", a, n);
-    printArray("b", b, m);
+    if ((l1 <= r2) && (l2 <= r1)) {
+      if ((n & 1) != 0) {
+        ans = max(l1, l2);
+      } else {
+        ans = (max(l1, l2) + min(r1, r2)) / (double)2;
+      }
+      return ans;
+    } else if (l1 > r2) {
+      hih = m1 - 1;
+    } else {
+      low = m1 + 1;
+    }
+  }
 
-    int ans = solve(a, b, n, m);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
 
-int solve(int a[], int b[], int n, int m)
-{
-    vector<int> v;
-    for (int i = 0; i < n; i++)
-    {
-        v.push_back(a[i]);
-    }
-    for (int i = 0; i < m; i++)
-    {
-        v.push_back(b[i]);
-    }
+int main() {
+  vector<int> a = {3, 5, 6, 12, 15};
+  vector<int> b = {3, 4, 6, 10, 10, 12};
 
-    sort(v.begin(), v.end());
+  cout << "INPUT(s):" << endl;
+  printVector(a, "  a = ");
+  printVector(b, "  b = ");
 
-    int median;
-    if (v.size())
-    {
-        median = v[v.size() / 2];
-    }
-    else
-    {
-        median = (v[v.size() / 2 - 1] + v[v.size() / 2]) / 2;
-    }
+  int ans = solve(a, b);
 
-    return median;
-}
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  return 0;
 }

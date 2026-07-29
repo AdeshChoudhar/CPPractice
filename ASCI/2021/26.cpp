@@ -1,74 +1,59 @@
-// Problem: Maximum profit by buying and selling a share at most twice
+//
+// Problem: Stock Buy and Sell – Max 2 Transactions Allowed
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+int maxProfitUtil(vector<int> &arr, vector<vector<vector<int>>> &dp, int idx,
+                  int cnt, int buy) {
+  int res = 0;
 
-#define ll long long
+  if ((cnt == 2) || (idx == arr.size())) {
+    return res;
+  }
 
-int solve(int[], int);
-void printArray(string, int[], int);
-void printArray(string, vector<int>, int);
+  if (dp[idx][cnt][buy] != INT_MIN) {
+    res = dp[idx][cnt][buy];
+    return res;
+  }
 
-int main()
-{
-    int arr[] = {2, 30, 15, 10, 8, 25, 80};
-    int n = sizeof(arr) / sizeof(arr[0]);
+  int pick, drop;
 
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, n);
+  if (buy) {
+    pick = -arr[idx] + maxProfitUtil(arr, dp, idx + 1, cnt, 0);
+    drop = maxProfitUtil(arr, dp, idx + 1, cnt, buy);
+  } else {
+    pick = arr[idx] + maxProfitUtil(arr, dp, idx + 1, cnt + 1, 1);
+    drop = maxProfitUtil(arr, dp, idx + 1, cnt, buy);
+  }
 
-    int ans = solve(arr, n);
+  dp[idx][cnt][buy] = max(pick, drop);
+  res = dp[idx][cnt][buy];
 
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return res;
 }
 
-int solve(int arr[], int n)
-{
-    vector<int> v(n, 0);
+int solve(vector<int> &arr) {
+  int ans = 0;
 
-    int maxi = arr[n - 1];
-    for (int i = n - 2; i >= 0; i--)
-    {
-        if (arr[i] > maxi)
-        {
-            maxi = arr[i];
-        }
-        v[i] = max(v[i + 1], maxi - arr[i]);
-    }
+  vector<vector<vector<int>>> dp(
+      arr.size(), vector<vector<int>>(3, vector<int>(2, INT_MIN)));
 
-    int mini = arr[0];
-    for (int i = 1; i < n; i++)
-    {
-        if (arr[i] < mini)
-        {
-            mini = arr[i];
-        }
-        v[i] = max(v[i - 1], v[i] + (arr[i] - mini));
-    }
+  ans = maxProfitUtil(arr, dp, 0, 0, 1);
 
-    return v[n - 1];
+  return ans;
 }
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
-}
+int main() {
+  vector<int> arr = {10, 22, 5, 75, 65, 80};
 
-void printArray(string s, vector<int> v, int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << v[i] << ", ";
-    }
-    cout << "}" << endl;
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
+
+  int ans = solve(arr);
+
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
+
+  return 0;
 }

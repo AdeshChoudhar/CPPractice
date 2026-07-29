@@ -1,104 +1,66 @@
+//
 // Problem: Max rectangle
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+int maxAreaUtil(vector<int> &v) {
+  int res = 0;
 
-#define ll long long
-#define MAX 1000
+  stack<int> s;
 
-int solve(int[MAX][MAX], int, int);
-int getMaxArea(int[], int);
-void printArray(string, int[], int);
-
-int main()
-{
-    int n = 4;
-    int m = 4;
-    int matrix[MAX][MAX] = {{0, 1, 1, 0},
-                            {1, 1, 1, 1},
-                            {1, 1, 1, 1},
-                            {1, 1, 0, 0}};
-
-    cout << "INPUT(s):" << endl;
-    for (int i = 0; i < n; i++)
-    {
-        if (i == 0)
-        {
-            printArray("matrix =", matrix[i], m);
-        }
-        else
-        {
-            printArray("        ", matrix[i], m);
-        }
+  int i = 0, n = v.size(), top, mxm;
+  while (i < n) {
+    if (s.empty() || (v[s.top()] <= v[i])) {
+      s.push(i);
+      i += 1;
+    } else {
+      top = s.top();
+      s.pop();
+      mxm = v[top] * (s.empty() ? i : i - s.top() - 1);
+      res = max(res, mxm);
     }
+  }
 
-    int ans = solve(matrix, n, m);
+  while (s.empty() == false) {
+    top = s.top();
+    s.pop();
+    mxm = v[top] * (s.empty() ? i : i - s.top() - 1);
+    res = max(res, mxm);
+  }
 
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return res;
 }
 
-int solve(int M[MAX][MAX], int n, int m)
-{
-    int area = 0, maxi = 0;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            if (i && M[i][j])
-            {
-                M[i][j] += M[i - 1][j];
-            }
-        }
-        area = getMaxArea(M[i], m);
-        maxi = max(maxi, area);
+int solve(vector<vector<int>> &mat) {
+  int ans = 0;
+
+  int mxm = 0;
+  for (int i = 0; i < mat.size(); i++) {
+    for (int j = 0; j < mat[0].size(); j++) {
+      if ((i != 0) && (mat[i][j] != 0)) {
+        mat[i][j] += mat[i - 1][j];
+      }
     }
 
-    return maxi;
+    mxm = maxAreaUtil(mat[i]);
+    ans = max(ans, mxm);
+  }
+
+  return ans;
 }
 
-int getMaxArea(int arr[], int n)
-{
-    stack<int> s;
-    int maxi = 0, top, area;
+int main() {
+  vector<vector<int>> mat = {
+      {0, 1, 1, 0}, {1, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 0, 0}};
 
-    int i = 0;
-    while (i < n)
-    {
-        if (s.empty() || arr[s.top()] <= arr[i])
-        {
-            s.push(i);
-            i += 1;
-        }
-        else
-        {
-            top = s.top();
-            s.pop();
-            area = arr[top] * (s.empty() ? i : i - s.top() - 1);
-            maxi = max(maxi, area);
-        }
-    }
+  cout << "INPUT(s):" << endl;
+  printMatrix(mat, "  mat = ");
 
-    while (s.empty() == false)
-    {
-        top = s.top();
-        s.pop();
-        area = arr[top] * (s.empty() ? i : i - s.top() - 1);
-        maxi = max(maxi, area);
-    }
+  int ans = solve(mat);
 
-    return maxi;
-}
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  return 0;
 }

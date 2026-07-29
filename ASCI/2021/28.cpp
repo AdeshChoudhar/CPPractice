@@ -1,70 +1,44 @@
-// Problem: Triplet sum in array
+//
+// Problem: Triplet Sum in Array
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+bool solve(vector<int> &arr, int target) {
+  bool ans = false;
 
-#define ll long long
+  sort(arr.begin(), arr.end());
 
-bool solve(int[], int, int);
-void printArray(string, int[], int);
+  for (int i = 0, n = arr.size(); i < (n - 2); i++) {
+    int l = i + 1, r = n - 1;
+    while (l < r) {
+      int sum = arr[i] + arr[l] + arr[r];
+      if (sum < target) {
+        l += 1;
+      } else if (sum > target) {
+        r -= 1;
+      } else {
+        ans = true;
+        return ans;
+      }
+    }
+  }
 
-int main()
-{
-    int arr[] = {1, 4, 45, 6, 10, 8};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int x = 13;
-
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, n);
-    cout << "\tx = " << x << endl;
-
-    string ans = solve(arr, n, x) ? "Yes" : "No";
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
 
-bool solve(int arr[], int n, int x)
-{
-    sort(arr, arr + n);
+int main() {
+  vector<int> arr = {1, 4, 45, 6, 10, 8};
+  int target = 13;
 
-    bool flag = false;
-    int l, r;
-    for (int i = 0; i < n - 2; i++)
-    {
-        l = i + 1;
-        r = n - 1;
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
+  cout << "  target = " << target << endl;
 
-        while (l < r)
-        {
-            if ((arr[i] + arr[l] + arr[r]) < x)
-            {
-                l += 1;
-            }
-            else if ((arr[i] + arr[l] + arr[r]) > x)
-            {
-                r -= 1;
-            }
-            else
-            {
-                flag = true;
-                break;
-            }
-        }
-    }
+  bool ans = solve(arr, target);
 
-    return flag;
-}
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << (ans ? "true" : "false") << endl;
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  return 0;
 }

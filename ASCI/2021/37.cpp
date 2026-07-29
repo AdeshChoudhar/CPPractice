@@ -1,90 +1,59 @@
-// Problem: Spirally traversing a matrix
+//
+// Problem: Spirally Traversing a Matrix
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+vector<int> solve(vector<vector<int>> &mat) {
+  vector<int> ans;
 
-#define ll long long
+  int row = mat.size(), col = mat[0].size();
+  ans.resize(row * col);
 
-vector<int> solve(vector<vector<int>>, int, int);
-void printArray(string, vector<int>, int);
-
-int main()
-{
-    vector<vector<int>> matrix = {{1, 2, 3},
-                                  {4, 5, 6},
-                                  {7, 8, 9}};
-
-    cout << "INPUT(s):" << endl;
-    for (int i = 0, n = matrix.size(); i < n; i++)
-    {
-        if (i == 0)
-        {
-            printArray("matrix =", matrix[i], matrix[i].size());
-        }
-        else
-        {
-            printArray("        ", matrix[i], matrix[i].size());
-        }
+  int r = 0, c = 0, idx = 0;
+  while ((r < row) && (c < col)) {
+    for (int i = c; i < col; i++, idx++) {
+      ans[idx] = mat[r][i];
     }
 
-    vector<int> ans = solve(matrix, matrix.size(), matrix[0].size());
+    r += 1;
 
-    cout << "OUTPUT(s):" << endl;
-    printArray("ans =", ans, ans.size());
+    for (int i = r; i < row; i++, idx++) {
+      ans[idx] = mat[i][col - 1];
+    }
 
-    return 0;
+    col -= 1;
+
+    if (r < row) {
+      for (int i = col - 1; i >= c; --i, idx++) {
+        ans[idx] = mat[row - 1][i];
+      }
+
+      row -= 1;
+    }
+
+    if (c < col) {
+      for (int i = row - 1; i >= r; --i, idx++) {
+        ans[idx] = mat[i][c];
+      }
+
+      c += 1;
+    }
+  }
+
+  return ans;
 }
+int main() {
+  vector<vector<int>> mat = {
+      {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
 
-vector<int> solve(vector<vector<int>> matrix, int r, int c)
-{
-    int row = 0;
-    int col = 0;
+  cout << "INPUT(s):" << endl;
+  printMatrix(mat, "  mat = ");
 
-    vector<int> v(r * c);
+  vector<int> ans = solve(mat);
 
-    int pos = 0;
-    while (row < r && col < c)
-    {
-        for (int i = col; i < c; i++)
-        {
-            v[pos++] = matrix[row][i];
-        }
-        row++;
+  cout << "OUTPUT(s):" << endl;
+  printVector(ans, "  ans = ");
 
-        for (int i = row; i < r; i++)
-        {
-            v[pos++] = matrix[i][c - 1];
-        }
-        c--;
-
-        if (row < r)
-        {
-            for (int i = c - 1; i >= col; --i)
-            {
-                v[pos++] = matrix[r - 1][i];
-            }
-            r--;
-        }
-
-        if (col < c)
-        {
-            for (int i = r - 1; i >= row; --i)
-            {
-                v[pos++] = matrix[i][col];
-            }
-            col++;
-        }
-    }
-    return v;
-}
-
-void printArray(string s, vector<int> v, int n)
-{
-    cout << "\t" << s << " { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << v[i] << ", ";
-    }
-    cout << "}" << endl;
+  return 0;
 }

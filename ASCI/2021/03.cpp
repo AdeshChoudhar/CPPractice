@@ -1,42 +1,31 @@
-// Problem: Kth smallest element
+//
+// Problem: Kth Smallest
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+int solve(vector<int> &v, int k) {
+  int ans;
 
-int solve(int[], int, int, int);
-void printArray(string, int[], int);
+  sort(v.begin(), v.end());
 
-int main()
-{
-    int arr[] = {7, 10, 4, 20, 15};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int k = 4;
+  ans = v[k - 1];
 
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, n);
-    cout << "\tk = " << k << endl;
-
-    int ans = solve(arr, 0, n - 1, k);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
 
-int solve(int arr[], int l, int r, int k)
-{
-    sort(arr, arr + r + 1);
-    return arr[k - 1];
-}
+int main() {
+  vector<int> v = {10, 5, 4, 3, 48, 6, 2, 33, 53, 10};
+  int k = 4;
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  cout << "INPUT(s):" << endl;
+  printVector(v, "  v = ");
+  cout << "  k = " << k << endl;
+
+  int ans = solve(v, k);
+
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
+
+  return 0;
 }

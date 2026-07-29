@@ -1,92 +1,45 @@
-// Problem: Common elements in all rows of a given matrix
+//
+// Problem: Common in Rows of a Matrix
+//
 
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../utils/utils.h"
 
-#define ll long long
-#define MAX 1000
+int solve(vector<vector<int>> &mat) {
+  int ans = 0;
 
-vector<int> solve(int[MAX][MAX], int, int);
-void printArray(string, int[], int);
-void printArray(string, vector<int>, int);
+  int m = mat.size(), n = mat[0].size();
 
-int main()
-{
-    int m = 4;
-    int n = 5;
-    int matrix[MAX][MAX] = {{1, 2, 1, 4, 8},
-                            {3, 7, 8, 5, 1},
-                            {8, 7, 7, 3, 1},
-                            {8, 1, 2, 7, 9}};
+  unordered_map<int, int> mp;
+  for (int i = 0; i < n; i++) {
+    mp[mat[0][i]] = 1;
+  }
 
-    cout << "INPUT(s):" << endl;
-    for (int i = 0; i < n; i++)
-    {
-        if (i == 0)
-        {
-            printArray("matrix =", matrix[i], n);
-        }
-        else
-        {
-            printArray("        ", matrix[i], n);
-        }
+  for (int i = 1; i < m; i++) {
+    for (int j = 0; j < n; j++) {
+      if (mp[mat[i][j]] == i) {
+        mp[mat[i][j]] += 1;
+      }
     }
+  }
 
-    vector<int> ans = solve(matrix, m, n);
+  for (auto x : mp) {
+    ans += (int)(x.second == m);
+  }
 
-    cout << "OUTPUT(s):" << endl;
-    printArray("ans", ans, ans.size());
-
-    return 0;
+  return ans;
 }
 
-vector<int> solve(int matrix[MAX][MAX], int m, int n)
-{
-    unordered_map<int, int> mp;
-    for (int i = 0; i < n; i++)
-    {
-        mp[matrix[0][i]] = 1;
-    }
+int main() {
+  vector<vector<int>> mat = {
+      {2, 1, 4, 3}, {1, 2, 3, 2}, {3, 6, 2, 3}, {5, 2, 5, 3}};
 
-    for (int i = 1; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            if (mp[matrix[i][j]] == i)
-            {
-                mp[matrix[i][j]] += 1;
-            }
-        }
-    }
+  cout << "INPUT(s):" << endl;
+  printMatrix(mat, "mat = ");
 
-    vector<int> v;
-    for (auto it = mp.begin(); it != mp.end(); it++)
-    {
-        if (it->second == m)
-        {
-            v.push_back(it->first);
-        }
-    }
+  int ans = solve(mat);
 
-    return v;
-}
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
-}
-
-void printArray(string s, vector<int> v, int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << v[i] << ", ";
-    }
-    cout << "}" << endl;
+  return 0;
 }

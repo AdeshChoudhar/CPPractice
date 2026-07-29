@@ -1,56 +1,36 @@
-// Problem: Maximum product subarray
+//
+// Problem: Maximum Product Subarray
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+int solve(vector<int> &arr) {
+  int ans = arr[0];
 
-#define ll long long
-
-ll solve(int[], int);
-void printArray(string, int[], int);
-
-int main()
-{
-    int arr[] = {6, -3, -10, 0, 2};
-    int n = sizeof(arr) / sizeof(arr[0]);
-
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, n);
-
-    ll int ans = solve(arr, n);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
-}
-
-ll int solve(int arr[], int n)
-{
-    ll int mini = arr[0], maxi = arr[0], max_product = arr[0];
-
-    for (int i = 1; i < n; i++)
-    {
-        if (arr[i] < 0)
-        {
-            swap(maxi, mini);
-        }
-
-        maxi = max((ll int)arr[i], maxi * arr[i]);
-        mini = min((ll int)arr[i], mini * arr[i]);
-
-        max_product = max(max_product, maxi);
+  int mnm = arr[0], mxm = arr[0];
+  for (int i = 1, n = arr.size(); i < n; i++) {
+    if (arr[i] < 0) {
+      swap(mxm, mnm);
     }
 
-    return max_product;
+    mnm = min(arr[i], mnm * arr[i]);
+    mxm = max(arr[i], mxm * arr[i]);
+    ans = max(ans, mxm);
+  }
+
+  return ans;
 }
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+int main() {
+  vector<int> arr = {-2, 6, -3, -10, 0, 2};
+
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
+
+  int ans = solve(arr);
+
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
+
+  return 0;
 }

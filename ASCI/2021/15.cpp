@@ -1,78 +1,43 @@
-// Problem: Next permutation
+//
+// Problem: Next Permutation
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+void solve(vector<int> &arr) {
+  int pvt = -1, n = arr.size();
+  for (int i = n - 2; i >= 0; i--) {
+    if (arr[i] < arr[i + 1]) {
+      pvt = i;
+      break;
+    }
+  }
 
-void solve(vector<int> &);
-void printArray(string, vector<int>, int);
+  if (pvt == -1) {
+    reverse(arr.begin(), arr.end());
+    return;
+  }
 
-int main()
-{
-    vector<int> v = {1, 2, 3};
+  for (int i = n - 1; i > pvt; i--) {
+    if (arr[i] > arr[pvt]) {
+      swap(arr[i], arr[pvt]);
+      break;
+    }
+  }
 
-    cout << "INPUT(s):" << endl;
-    printArray("arr", v, v.size());
-
-    solve(v);
-
-    cout << "OUTPUT(s):" << endl;
-    printArray("arr", v, v.size());
-
-    return 0;
+  reverse(arr.begin() + pvt + 1, arr.end());
 }
 
-void solve(vector<int> &v)
-{
-    int i, length = v.size();
-    for (i = length - 2; i >= 0 && v[i] >= v[i + 1]; i--)
-    {
-        // NOTHING
-    }
+int main() {
+  vector<int> arr = {2, 4, 1, 7, 5, 0};
 
-    if (i < 0)
-    {
-        sort(v.begin(), v.end());
-    }
-    else
-    {
-        int index = -1, l = i + 1, r = length - 1, key = v[i];
-        while (l <= r)
-        {
-            int mid = l + (r - l) / 2;
-            if (v[mid] <= key)
-            {
-                r = mid - 1;
-            }
-            else
-            {
-                l = mid + 1;
-                if (index == -1 || v[index] >= v[mid])
-                {
-                    index = mid;
-                }
-            }
-        }
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
 
-        int tmp = v[i];
-        v[i] = v[index];
-        v[index] = tmp;
+  solve(arr);
 
-        for (int l = i + 1, r = length - 1; l < r; l++, r--)
-        {
-            tmp = v[l];
-            v[l] = v[r];
-            v[r] = tmp;
-        }
-    }
-}
+  cout << "OUTPUT(s):" << endl;
+  printVector(arr, "  arr = ");
 
-void printArray(string s, vector<int> v, int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << v[i] << ", ";
-    }
-    cout << "}" << endl;
+  return 0;
 }

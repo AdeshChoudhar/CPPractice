@@ -1,163 +1,41 @@
-// Problem: Union and intersection of two arrays
+//
+// Problem: Union of Arrays with Duplicates
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+vector<int> solve(vector<int> &a, vector<int> &b) {
+  vector<int> ans;
 
-int solve(int[], int[], int, int);
-void uniosizeofArrays(int[], int[], int, int);
-void intersectiosizeofArrays(int[], int[], int, int);
-void printArray(string, int[], int);
-void printSet(string, set<int>);
+  unordered_set<int> us;
 
-int main()
-{
-    int a[] = {1, 2, 3};
-    int b[] = {1, 2, 3, 4, 5};
+  for (int x : a) {
+    us.insert(x);
+  }
 
-    int n = sizeof(a) / sizeof(a[0]);
-    int m = sizeof(b) / sizeof(b[0]);
+  for (int x : b) {
+    us.insert(x);
+  }
 
-    cout << "INPUT(s):" << endl;
-    printArray("A", a, n);
-    printArray("B", b, m);
+  for (int x : us) {
+    ans.push_back(x);
+  }
 
-    int ans = solve(a, b, n, m);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    // uniosizeofArrays(a, b, n, m);
-    // intersectiosizeofArrays(a, b, n, m);
-
-    return 0;
+  return ans;
 }
 
-int solve(int a[], int b[], int n, int m)
-{
-    vector<int> v;
+int main() {
+  vector<int> a = {1, 2, 3, 2, 1};
+  vector<int> b = {3, 2, 2, 3, 3, 2};
 
-    sort(a, a + n);
-    sort(b, b + m);
+  cout << "INPUT(s):" << endl;
+  printVector(a, "  a = ");
+  printVector(b, "  b = ");
 
-    int i = 0, j = 0;
+  vector<int> ans = solve(a, b);
 
-    if (a[i] < b[j])
-    {
-        v.push_back(a[i++]);
-    }
-    else if (b[j] < a[i])
-    {
-        v.push_back(b[j++]);
-    }
-    else
-    {
-        v.push_back(a[i++]);
-        j++;
-    }
+  cout << "OUTPUT(s):" << endl;
+  printVector(ans, "  ans = ");
 
-    while (i < n || j < m)
-    {
-        if (i == n && j < m)
-        {
-            if (b[j] != *(v.end() - 1))
-            {
-                v.push_back(b[j]);
-            }
-            j++;
-        }
-        else if (i < n && j == m)
-        {
-            if (a[i] != *(v.end() - 1))
-            {
-                v.push_back(a[i]);
-            }
-            i++;
-        }
-        else
-        {
-            if (a[i] < b[j])
-            {
-                if (a[i] != *(v.end() - 1))
-                {
-                    v.push_back(a[i]);
-                }
-                i++;
-            }
-            else if (b[j] < a[i])
-            {
-                if (b[j] != *(v.end() - 1))
-                {
-                    v.push_back(b[j]);
-                }
-                j++;
-            }
-            else
-            {
-                if (a[i] != *(v.end() - 1))
-                {
-                    v.push_back(a[i]);
-                    j++;
-                }
-                i++;
-            }
-        }
-    }
-
-    return v.size();
-}
-
-void uniosizeofArrays(int a[], int b[], int n, int m)
-{
-    set<int> s = {};
-
-    for (int i = 0; i < n; i++)
-    {
-        s.insert(a[i]);
-    }
-
-    for (int i = 0; i < m; i++)
-    {
-        s.insert(b[i]);
-    }
-
-    printSet("Union", s);
-}
-
-void intersectiosizeofArrays(int a[], int b[], int n, int m)
-{
-    set<int> s = {};
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; b[j] <= a[i]; j++)
-        {
-            if (b[j] == a[i])
-            {
-                s.insert(b[j]);
-            }
-        }
-    }
-
-    printSet("Intersection", s);
-}
-
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
-}
-
-void printSet(string s, set<int> st)
-{
-    cout << "\t" << s << " = { ";
-    for (auto it = st.begin(); it != st.end(); it++)
-    {
-        cout << *it << ", ";
-    }
-    cout << "}" << endl;
+  return 0;
 }

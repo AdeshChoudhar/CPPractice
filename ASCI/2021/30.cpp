@@ -1,51 +1,32 @@
-// Problem: Chocolate distribution problem
+//
+// Problem: Chocolate Distribution Problem
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+int solve(vector<int> &a, int m) {
+  int ans = INT_MAX;
 
-#define ll long long
+  sort(a.begin(), a.end());
 
-ll int solve(vector<ll int>, ll, ll);
-void printArray(string, vector<ll int>, int);
+  for (int i = 0, n = a.size(); i < (n - (m - 1)); i++) {
+    ans = min(ans, a[i + m - 1] - a[i]);
+  }
 
-int main()
-{
-    vector<ll int> v = {3, 4, 1, 9, 56, 7, 9, 12};
-    int n = v.size();
-    int m = 5;
-
-    cout << "INPUT(s):" << endl;
-    printArray("arr", v, n);
-    cout << "\tm = " << m << endl;
-
-    ll int ans = solve(v, n, m);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
+int main() {
+  vector<int> a = {3, 4, 1, 9, 56, 7, 9, 12};
+  int m = 5;
 
-ll int solve(vector<ll int> a, ll n, ll m)
-{
-    sort(a.begin(), a.end());
+  cout << "INPUT(s):" << endl;
+  printVector(a, "  a = ");
+  cout << "  m = " << m << endl;
 
-    ll int mini = INT_MAX;
-    for (int i = 0; i < (n - m + 1); i++)
-    {
-        mini = min(mini, a[i + m - 1] - a[i]);
-    }
+  int ans = solve(a, m);
 
-    return mini;
-}
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
 
-void printArray(string s, vector<ll int> v, int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << v[i] << ", ";
-    }
-    cout << "}" << endl;
+  return 0;
 }

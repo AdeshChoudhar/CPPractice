@@ -1,59 +1,38 @@
+//
 // Problem: Smallest subarray with sum greater than x
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+int solve(vector<int> &arr, int x) {
+  int ans = INT_MAX;
 
-#define ll long long
+  int n = arr.size(), sum = 0, i = 0;
+  for (int j = 0; j < n; j++) {
+    sum += arr[j];
+    while (sum > x) {
+      ans = min(ans, j - i + 1);
+      sum -= arr[i];
+      i += 1;
+    }
+  }
 
-int solve(int[], int, int);
-void printArray(string, int[], int);
+  ans = (ans == INT_MAX) ? 0 : ans;
 
-int main()
-{
-    int arr[] = {1, 4, 45, 6, 0, 19};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int x = 51;
-
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, n);
-
-    int ans = solve(arr, n, x);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
 
-int solve(int arr[], int n, int x)
-{
-    int s = 0, mini = n + 1, start = 0, end = 0;
-    while (end < n)
-    {
-        while ((s <= x) && (end < n))
-        {
-            s += arr[end];
-            end += 1;
-        }
+int main() {
+  vector<int> arr = {1, 4, 45, 6, 0, 19};
+  int x = 51;
 
-        while (s > x && start < n)
-        {
-            mini = min(mini, end - start);
-            s -= arr[start];
-            start += 1;
-        }
-    }
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
 
-    return mini;
-}
+  int ans = solve(arr, x);
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
+
+  return 0;
 }

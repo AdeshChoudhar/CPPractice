@@ -1,65 +1,47 @@
+//
 // Problem: Factorials of large numbers
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+void factorialUtil(vector<int> &v, int n) {
+  if ((n == 0) || (n == 1)) {
+    return;
+  }
 
-#define ll long long
+  factorialUtil(v, n - 1);
 
-vector<int> solve(int);
-void fact(vector<int> &, int);
+  int rem = 0, sum;
+  for (int i = v.size() - 1; i >= 0; i--) {
+    sum = v[i] * n + rem;
+    v[i] = sum % 10;
+    rem = sum / 10;
+  }
 
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-
-    int N = 10;
-
-    cout << "INPUT(s):" << endl;
-    cout << "\tN = " << N << endl;
-
-    vector<int> ans = solve(N);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = ";
-    for (int i = 0, n = ans.size(); i < n; i++)
-    {
-        cout << ans[i];
-    }
-    cout << endl;
-
-    return 0;
+  while (rem > 0) {
+    v.insert(v.begin(), rem % 10);
+    rem = rem / 10;
+  }
 }
 
-vector<int> solve(int N)
-{
-    vector<int> v = {1};
-    fact(v, N);
-    return v;
+vector<int> solve(int n) {
+  vector<int> ans = {1};
+
+  factorialUtil(ans, n);
+
+  return ans;
 }
 
-void fact(vector<int> &v, int n)
-{
-    if (n == 0 || n == 1)
-    {
-        return;
-    }
+int main() {
+  int n = 5;
 
-    fact(v, n - 1);
+  cout << "INPUT(s):" << endl;
+  cout << "  n = " << n << endl;
 
-    int k = 0, c = 0;
-    for (int i = v.size() - 1; i >= 0; i--)
-    {
-        k = v[i];
-        v[i] = (k * n + c) % 10;
-        c = (k * n + c) / 10;
-    }
+  vector<int> ans = solve(n);
 
-    while (c > 0)
-    {
-        v.insert(v.begin(), c % 10);
-        c = c / 10;
-    }
+  cout << "OUTPUT(s):" << endl;
+  printVector(ans, " ans =");
+
+  return 0;
 }

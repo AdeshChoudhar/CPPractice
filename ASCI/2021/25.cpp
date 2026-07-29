@@ -1,72 +1,39 @@
-// Problem: Find all elements that appear more than n / k times
+//
+// Problem: More than n/k Occurrences
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+int solve(vector<int> &arr, int k) {
+  int ans = 0;
 
-#define ll long long
+  int n = arr.size();
+  unordered_map<int, int> um;
 
-vector<int> solve(int[], int, int);
-void printArray(string, int[], int);
-void printArray(string, vector<int>, int);
+  for (int i = 0; i < n; i++) {
+    um[arr[i]] += 1;
+  }
 
-int main()
-{
-    int arr[] = {1, 1, 2, 2, 3, 5, 4, 2, 2, 3, 1, 1, 1};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int k = 4;
+  int cnt = n / k;
+  for (auto x : um) {
+    ans += (int)(x.second > cnt);
+  }
 
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, n);
-    cout << "\tn = " << n << endl;
-    cout << "\tk = " << k << endl;
-
-    vector<int> ans = solve(arr, n, k);
-
-    cout << "OUTPUT(s):" << endl;
-    printArray("ans", ans, ans.size());
-
-    return 0;
+  return ans;
 }
 
-vector<int> solve(int arr[], int n, int k)
-{
-    int x = n / k;
+int main() {
+  vector<int> arr = {3, 1, 2, 2, 1, 2, 3, 3};
+  int k = 4;
 
-    unordered_map<int, int> mp;
-    for (int i = 0; i < n; i++)
-    {
-        mp[arr[i]] += 1;
-    }
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
+  cout << "  k = " << k << endl;
 
-    vector<int> v;
-    for (auto i = mp.begin(), n = mp.end(); i != n; i++)
-    {
-        if ((*i).second > x)
-        {
-            v.push_back((*i).first);
-        }
-    }
+  int ans = solve(arr, k);
 
-    return v;
-}
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
-}
-
-void printArray(string s, vector<int> v, int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << v[i] << ", ";
-    }
-    cout << "}" << endl;
+  return 0;
 }

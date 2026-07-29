@@ -1,44 +1,25 @@
-// Problem: Reverse the array
+//
+// Problem: Reverse an Array
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
-
-void solve(int[], int);
-void printArray(string, int[], int);
-
-int main()
-{
-    int arr[] = {4, 5, 1, 2};
-    int n = sizeof(arr) / sizeof(arr[0]);
-
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, n);
-
-    solve(arr, n);
-
-    cout << "OUTPUT(s):" << endl;
-    printArray("arr", arr, n);
-
-    return 0;
+void solve(vector<int> &arr) {
+  for (int i = 0, n = arr.size(); i < (n / 2); i++) {
+    swap(arr[i], arr[n - 1 - i]);
+  }
 }
 
-void solve(int arr[], int n)
-{
-    for (int i = 0; i < n / 2; i++)
-    {
-        int tmp = arr[i];
-        arr[i] = arr[n - 1 - i];
-        arr[n - 1 - i] = tmp;
-    }
-}
+int main() {
+  vector<int> arr = {1, 4, 3, 2, 6, 5};
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
+
+  solve(arr);
+
+  cout << "OUTPUT(s):" << endl;
+  printVector(arr, "  arr = ");
+
+  return 0;
 }

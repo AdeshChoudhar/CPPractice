@@ -1,73 +1,54 @@
-// Problem: Rotate a matrix by 90 degree clockwise
+//
+// Problem: Rotate Matrix Clockwise by One
+//
 
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../utils/utils.h"
 
-#define ll long long
-#define MAX 1000
+vector<vector<int>> solve(vector<vector<int>> &mat) {
+  vector<vector<int>> ans = mat;
 
-void solve(int[MAX][MAX], int);
-void printArray(string, int[], int);
+  int t = 0, b = ans.size() - 1, l = 0, r = ans[0].size() - 1;
 
-int main()
-{
-    int n = 3;
-    int matrix[MAX][MAX] = {{1, 2, 3},
-                            {4, 5, 6},
-                            {7, 8, 9}};
+  while ((t < b) && (l < r)) {
+    int tmp = ans[t][l];
 
-    cout << "INPUT(s):" << endl;
-    for (int i = 0; i < n; i++)
-    {
-        if (i == 0)
-        {
-            printArray("matrix =", matrix[i], n);
-        }
-        else
-        {
-            printArray("        ", matrix[i], n);
-        }
+    for (int i = t; i < b; i++) {
+      ans[i][l] = ans[i + 1][l];
     }
 
-    solve(matrix, n);
-
-    cout << "OUTPUT(s):" << endl;
-    for (int i = 0; i < n; i++)
-    {
-        if (i == 0)
-        {
-            printArray("matrix =", matrix[i], n);
-        }
-        else
-        {
-            printArray("        ", matrix[i], n);
-        }
+    for (int i = l; i < r; i++) {
+      ans[b][i] = ans[b][i + 1];
     }
 
-    return 0;
+    for (int i = b; i > t; i--) {
+      ans[i][r] = ans[i - 1][r];
+    }
+
+    for (int i = r; i > l; i--) {
+      ans[t][i] = ans[t][i - 1];
+    }
+
+    ans[t][l + 1] = tmp;
+
+    t += 1;
+    b -= 1;
+    l += 1;
+    r -= 1;
+  }
+
+  return ans;
 }
 
-void solve(int matrix[MAX][MAX], int n)
-{
-    for (int i = 0; i < n / 2; i++)
-    {
-        for (int j = i; j < n - i - 1; j++)
-        {
-            int tmp = matrix[i][j];
-            matrix[i][j] = matrix[n - 1 - j][i];
-            matrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j];
-            matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i];
-            matrix[j][n - 1 - i] = tmp;
-        }
-    }
-}
+int main() {
+  vector<vector<int>> mat = {{1, 2, 3}, {2, 3, 3}};
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  cout << "INPUT(s):" << endl;
+  printMatrix(mat, "mat = ");
+
+  vector<vector<int>> ans = solve(mat);
+
+  cout << "OUTPUT(s):" << endl;
+  printMatrix(ans, "ans = ");
+
+  return 0;
 }

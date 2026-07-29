@@ -1,54 +1,34 @@
-// Problem: Print all duplicates in string
+//
+// Problem: String Duplicates Removal
+//
 
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../utils/utils.h"
 
-#define ll long long
+string solve(string &s) {
+  string ans;
 
-vector<char> solve(string);
-void printArray(string, vector<char>, int);
+  unordered_map<char, int> um;
+  for (auto x : s) {
+    if (um[x] == 0) {
+      ans.push_back(x);
+    }
 
-int main()
-{
-    string str = "test_string";
+    um[x] += 1;
+  }
 
-    cout << "INPUT(s):" << endl;
-    cout << "\tstr = " << str << endl;
-
-    vector<char> ans = solve(str);
-
-    cout << "OUTPUT(s):" << endl;
-    printArray("ans", ans, ans.size());
-
-    return 0;
+  return ans;
 }
 
-vector<char> solve(string str)
-{
-    unordered_map<char, int> mp;
-    for (auto x : str)
-    {
-        mp[x] += 1;
-    }
+int main() {
+  string s = "geEksforGEeks";
 
-    vector<char> v;
-    for (auto x : mp)
-    {
-        if (x.second > 1)
-        {
-            v.push_back(x.first);
-        }
-    }
+  cout << "INPUT(s):" << endl;
+  cout << "  s = " << s << endl;
 
-    return v;
-}
+  string ans = solve(s);
 
-void printArray(string s, vector<char> v, int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << v[i] << ", ";
-    }
-    cout << "}" << endl;
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
+
+  return 0;
 }

@@ -1,78 +1,51 @@
-// Problem: Rearrange the array alternate positive and negative numbers with O(1) extra space
+//
+// Problem: Alternate Positive Negative
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+void solve(vector<int> &arr) {
+  vector<int> pos, neg;
 
-#define ll long long
+  for (int x : arr) {
+    if (x >= 0) {
+      pos.push_back(x);
+    } else {
+      neg.push_back(x);
+    }
+  }
 
-void solve(int[], int);
-void rightRotate(int[], int, int, int);
-void printArray(string, int[], int);
+  int i = 0, pi = 0, pn = pos.size(), ni = 0, nn = neg.size();
 
-int main()
-{
-    int arr[] = {-5, -2, 5, 2, 4, 7, 1, 8, 0, -8};
-    int n = sizeof(arr) / sizeof(arr[0]);
+  for (; (pi < pn) && (ni < nn); i++) {
+    if ((i % 2) == 0) {
+      arr[i] = pos[pi];
+      pi += 1;
+    } else {
+      arr[i] = neg[ni];
+      ni += 1;
+    }
+  }
 
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, n);
+  for (; pi < pn; pi++, i++) {
+    arr[i] = pos[pi];
+  }
 
-    solve(arr, n);
-
-    cout << "OUTPUT(s):" << endl;
-    printArray("arr", arr, n);
-
-    return 0;
+  for (; ni < nn; ni++, i++) {
+    arr[i] = neg[ni];
+  }
 }
 
-void solve(int arr[], int n)
-{
-    int l = -1;
-    for (int i = 0; i < n; i++)
-    {
-        if (l >= 0)
-        {
-            if (((arr[i] >= 0) && (arr[l] < 0)) || ((arr[i] < 0) && (arr[l] >= 0)))
-            {
-                rightRotate(arr, n, l, i);
-                if ((i - l) >= 2)
-                {
-                    l += 2;
-                }
-                else
-                {
-                    l = -1;
-                }
-            }
-        }
+int main() {
+  vector<int> arr = {9, 4, -2, -1, 5, 0, -5, -3, 2};
 
-        if (l == -1)
-        {
-            if (((arr[i] >= 0) && (!(i & 0x01))) || ((arr[i] < 0) && (i & 0x01)))
-            {
-                l = i;
-            }
-        }
-    }
-}
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
 
-void rightRotate(int arr[], int n, int l, int r)
-{
-    int tmp = arr[r];
-    for (int i = r; i > l; i--)
-    {
-        arr[i] = arr[i - 1];
-    }
-    arr[l] = tmp;
-}
+  solve(arr);
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  cout << "OUTPUT(s):" << endl;
+  printVector(arr, "  arr = ");
+
+  return 0;
 }

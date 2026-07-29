@@ -1,61 +1,42 @@
-// Problem: Trapping rain water
+//
+// Problem: Trapping Rain Water
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+int solve(vector<int> &arr) {
+  int ans = 0;
 
-#define ll long long
+  int n = arr.size();
+  vector<int> left(n), right(n);
 
-int solve(int[], int);
-void printArray(string, int[], int);
+  left[0] = arr[0];
+  for (int i = 1; i < n; i++) {
+    left[i] = max(left[i - 1], arr[i]);
+  }
 
-int main()
-{
-    int arr[] = {3, 0, 0, 2, 0, 4};
-    int n = sizeof(arr) / sizeof(arr[0]);
+  right[n - 1] = arr[n - 1];
+  for (int i = n - 2; i >= 0; i--) {
+    right[i] = max(right[i + 1], arr[i]);
+  }
 
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, n);
+  for (int i = 0; i < n; i++) {
+    ans += min(left[i], right[i]) - arr[i];
+  }
 
-    int ans = solve(arr, n);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
 
-int solve(int arr[], int n)
-{
-    int left[n], right[n];
+int main() {
+  vector<int> arr = {3, 0, 1, 0, 4, 0, 2};
 
-    left[0] = arr[0];
-    for (int i = 1; i < n; i++)
-    {
-        left[i] = max(left[i - 1], arr[i]);
-    }
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
 
-    right[n - 1] = arr[n - 1];
-    for (int i = n - 2; i >= 0; i--)
-    {
-        right[i] = max(right[i + 1], arr[i]);
-    }
+  int ans = solve(arr);
 
-    int water = 0;
-    for (int i = 0; i < n; i++)
-    {
-        water += min(left[i], right[i]) - arr[i];
-    }
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
 
-    return water;
-}
-
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  return 0;
 }

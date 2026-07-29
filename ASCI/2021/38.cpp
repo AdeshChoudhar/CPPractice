@@ -1,72 +1,38 @@
-// Problem: Search a 2D matrix
+//
+// Problem: Search in a Row-Column Sorted
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+bool solve(vector<vector<int>> &mat, int x) {
+  bool ans = false;
 
-#define ll long long
-
-bool solve(vector<vector<int>> &, int);
-void printArray(string, vector<int>, int);
-
-int main()
-{
-    vector<vector<int>> matrix = {{1, 3, 5, 7},
-                                  {10, 11, 16, 20},
-                                  {23, 30, 34, 60}};
-    int target = 3;
-
-    cout << "INPUT(s):" << endl;
-    for (int i = 0, n = matrix.size(); i < n; i++)
-    {
-        if (i == 0)
-        {
-            printArray("matrix =", matrix[i], matrix[i].size());
-        }
-        else
-        {
-            printArray("        ", matrix[i], matrix[i].size());
-        }
+  int r = mat.size(), c = mat[0].size(), i = 0, j = c - 1;
+  while ((i >= 0) && (i < r) && (j >= 0) && (j < c)) {
+    if (mat[i][j] < x) {
+      i += 1;
+    } else if (mat[i][j] > x) {
+      j -= 1;
+    } else {
+      ans = true;
+      return ans;
     }
-    cout << "\ttarget = " << target << endl;
+  }
 
-    string ans = solve(matrix, target) ? "Yes" : "No";
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
+int main() {
+  vector<vector<int>> mat = {{3, 30, 38}, {20, 52, 54}, {35, 60, 69}};
+  int x = 62;
 
-bool solve(vector<vector<int>> &matrix, int target)
-{
-    int r = matrix.size(), c = matrix[0].size();
-    int x = 0, y = c - 1;
-    while (x >= 0 && x < r && y >= 0 && y < c)
-    {
-        if (matrix[x][y] < target)
-        {
-            x++;
-        }
-        else if (matrix[x][y] > target)
-        {
-            y--;
-        }
-        else
-        {
-            return true;
-        }
-    }
+  cout << "INPUT(s):" << endl;
+  printMatrix(mat, "  mat = ");
+  cout << "  x = " << x << endl;
 
-    return false;
-}
+  bool ans = solve(mat, x);
 
-void printArray(string s, vector<int> v, int n)
-{
-    cout << "\t" << s << " { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << v[i] << ", ";
-    }
-    cout << "}" << endl;
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << (ans ? "true" : "false") << endl;
+
+  return 0;
 }

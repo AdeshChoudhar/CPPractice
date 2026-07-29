@@ -1,35 +1,32 @@
-// Problem: Palindrome string
+//
+// Problem: Palindrome String
+//
 
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../utils/utils.h"
 
-#define ll long long
+bool solve(string &s) {
+  bool ans = true;
 
-bool solve(string);
+  for (int i = 0, n = s.size(); i < (n / 2); i++) {
+    if (s[i] != s[n - 1 - i]) {
+      ans = false;
+      return ans;
+    }
+  }
 
-int main()
-{
-    string str = "abba";
-
-    cout << "INPUT(s):" << endl;
-    cout << "\tstr = " << str << endl;
-
-    string ans = (solve(str) ? "Yes" : "No");
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
 
-bool solve(string str)
-{
-    for (int i = 0, n = str.size(); i < n / 2; i++)
-    {
-        if (str[i] != str[n - 1 - i])
-        {
-            return false;
-        }
-    }
-    return true;
+int main() {
+  string s = "abba";
+
+  cout << "INPUT(s):" << endl;
+  cout << "  s = " << s << endl;
+
+  bool ans = solve(s);
+
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << (ans ? "true" : "false") << endl;
+
+  return 0;
 }

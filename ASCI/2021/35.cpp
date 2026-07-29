@@ -1,53 +1,34 @@
-// Problem: Find the median
+//
+// Problem: Median of an Array
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+double solve(vector<int> &arr) {
+  double ans;
 
-#define ll long long
+  sort(arr.begin(), arr.end());
 
-int solve(vector<int>);
-void printArray(string, vector<int>, int);
+  int n = arr.size();
+  if ((n & 1) != 0) {
+    ans = arr[n / 2];
+  } else {
+    ans = (arr[(n / 2) - 1] + arr[n / 2]) / (double)2;
+  }
 
-int main()
-{
-    vector<int> v = {90, 100, 78, 89, 67};
-    int n = v.size();
-
-    cout << "INPUT(s):" << endl;
-    printArray("arr", v, n);
-
-    int ans = solve(v);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
 
-int solve(vector<int> v)
-{
-    sort(v.begin(), v.end());
+int main() {
+  vector<int> arr = {90, 100, 78, 89, 67};
 
-    int median;
-    if (v.size() % 2)
-    {
-        median = v[v.size() / 2];
-    }
-    else
-    {
-        median = (v[(v.size() / 2) - 1] + v[v.size() / 2]) / 2;
-    }
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
 
-    return median;
-}
+  double ans = solve(arr);
 
-void printArray(string s, vector<int> v, int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << v[i] << ", ";
-    }
-    cout << "}" << endl;
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
+
+  return 0;
 }

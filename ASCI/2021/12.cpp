@@ -1,57 +1,39 @@
-// Problem: Merge without extra space
+//
+// Problem: Merge Without Extra Space
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+void solve(vector<int> &a, vector<int> &b) {
+  int m = a.size(), n = b.size();
+  for (int i = m - 1, j = 0; (i >= 0) && (j < n);) {
+    if (a[i] <= b[j]) {
+      break;
+    }
 
-void solve(int[], int[], int, int);
-void printArray(string, int[], int);
+    swap(a[i], b[j]);
 
-int main()
-{
-    int a[] = {1, 3, 5, 7};
-    int b[] = {0, 2, 6, 8, 9};
+    i -= 1;
+    j += 1;
+  }
 
-    int n = sizeof(a) / sizeof(a[0]);
-    int m = sizeof(b) / sizeof(b[0]);
-
-    cout << "INPUT(s):" << endl;
-    printArray("a", a, n);
-    printArray("b", b, m);
-
-    solve(a, b, n, m);
-
-    cout << "OUTPUT(s):" << endl;
-    printArray("a", a, n);
-    printArray("b", b, m);
-
-    return 0;
+  sort(a.begin(), a.end());
+  sort(b.begin(), b.end());
 }
 
-void solve(int a[], int b[], int n, int m)
-{
-    for (int i = m - 1; i >= 0; i--)
-    {
-        int j, last = a[n - 1];
-        for (j = n - 2; j >= 0 && a[j] > b[i]; j--)
-        {
-            a[j + 1] = a[j];
-        }
+int main() {
+  vector<int> a = {2, 4, 7, 10};
+  vector<int> b = {2, 3};
 
-        if (j != n - 2 || last > b[i])
-        {
-            a[j + 1] = b[i];
-            b[i] = last;
-        }
-    }
-}
+  cout << "INPUT(s):" << endl;
+  printVector(a, "  a = ");
+  printVector(b, "  b = ");
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  solve(a, b);
+
+  cout << "OUTPUT(s):" << endl;
+  printVector(a, "  a = ");
+  printVector(b, "  b = ");
+
+  return 0;
 }

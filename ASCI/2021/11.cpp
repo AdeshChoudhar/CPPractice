@@ -1,51 +1,39 @@
-// Problem: Find the duplicate number
+//
+// Problem: Find unique element
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+int solve(vector<int> &arr, int k) {
+  int ans;
 
-int solve(vector<int> &);
-void printArray(string, vector<int>, int);
+  unordered_map<int, int> um;
+  for (int x : arr) {
+    um[x] += 1;
+  }
 
-int main()
-{
-    vector<int> v = {1, 3, 4, 2, 2};
+  for (auto x : um) {
+    if ((x.second % k) != 0) {
+      ans = x.first;
+      break;
+    }
+  }
 
-    cout << "INPUT(s):" << endl;
-    printArray("arr", v, v.size());
-
-    int ans = solve(v);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
 
-int solve(vector<int> &v)
-{
-    int i;
-    for (i = 0; i < v.size(); i++)
-    {
-        if (v[abs(v[i])] > 0)
-        {
-            v[abs(v[i])] = -v[abs(v[i])];
-        }
-        else
-        {
-            break;
-        }
-    }
+int main() {
+  vector<int> arr = {6, 2, 5, 2, 2, 6, 6};
+  int k = 3;
 
-    return abs(v[i]);
-}
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
+  cout << "  k = " << k << endl;
 
-void printArray(string s, vector<int> v, int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << v[i] << ", ";
-    }
-    cout << "}" << endl;
+  int ans = solve(arr, k);
+
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
+
+  return 0;
 }

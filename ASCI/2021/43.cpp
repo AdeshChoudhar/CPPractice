@@ -1,83 +1,53 @@
-// Problem: Specific pair in matrix
+//
+// Problem: Max Diff with Below and Right in Grid
+//
 
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../utils/utils.h"
 
-#define ll long long
-#define MAX 1000
+int solve(vector<vector<int>> &mat) {
+  int ans = INT_MIN;
 
-int solve(int[MAX][MAX], int);
-void printArray(string, int[], int);
+  int n = mat.size(), mxm;
 
-int main()
-{
-    int n = 5;
-    int matrix[MAX][MAX] = {{1, 2, -1, -4, -20},
-                            {-8, -3, 4, 2, 1},
-                            {3, 8, 6, 1, 3},
-                            {-4, -1, 1, 7, -6},
-                            {0, -4, 10, -5, 1}};
+  vector<vector<int>> res(n, vector<int>(n));
+  res[n - 1][n - 1] = mat[n - 1][n - 1];
 
-    cout << "INPUT(s):" << endl;
-    for (int i = 0; i < n; i++)
-    {
-        if (i == 0)
-        {
-            printArray("matrix =", matrix[i], n);
-        }
-        else
-        {
-            printArray("        ", matrix[i], n);
-        }
+  mxm = mat[n - 1][n - 1];
+  for (int i = n - 2; i >= 0; i--) {
+    mxm = max(mxm, mat[n - 1][i]);
+    res[n - 1][i] = mxm;
+  }
+
+  mxm = mat[n - 1][n - 1];
+  for (int i = n - 2; i >= 0; i--) {
+    mxm = max(mxm, mat[i][n - 1]);
+    res[i][n - 1] = mxm;
+  }
+
+  for (int i = n - 2; i >= 0; i--) {
+    for (int j = n - 2; j >= 0; j--) {
+      ans = max(ans, (res[i + 1][j + 1] - mat[i][j]));
+      res[i][j] = max(mat[i][j], max(res[i][j + 1], res[i + 1][j]));
     }
+  }
 
-    int ans = solve(matrix, n);
-
-    cout << "OUTPUT(s):" << endl;
-    cout << "\tans = " << ans << endl;
-
-    return 0;
+  return ans;
 }
 
-int solve(int matrix[MAX][MAX], int n)
-{
-    int m, maxi = INT_MIN;
-    int tmp[n][n];
+int main() {
+  vector<vector<int>> mat = {{1, 2, -1, -4, -20},
+                             {-8, -3, 4, 2, 1},
+                             {3, 8, 6, 1, 3},
+                             {-4, -1, 1, 7, -6},
+                             {0, -4, 10, -5, 1}};
 
-    tmp[n - 1][n - 1] = matrix[n - 1][n - 1];
+  cout << "INPUT(s):" << endl;
+  printMatrix(mat, "  mat = ");
 
-    m = matrix[n - 1][n - 1];
-    for (int i = n - 2; i >= 0; i--)
-    {
-        m = max(m, matrix[n - 1][i]);
-        tmp[n - 1][i] = m;
-    }
+  int ans = solve(mat);
 
-    m = matrix[n - 1][n - 1];
-    for (int i = n - 2; i >= 0; i--)
-    {
-        m = max(m, matrix[i][n - 1]);
-        tmp[i][n - 1] = m;
-    }
+  cout << "OUTPUT(s):" << endl;
+  cout << "  ans = " << ans << endl;
 
-    for (int i = n - 2; i >= 0; i--)
-    {
-        for (int j = n - 2; j >= 0; j--)
-        {
-            maxi = max(maxi, (tmp[i + 1][j + 1] - matrix[i][j]));
-            tmp[i][j] = max(matrix[i][j], max(tmp[i][j + 1], tmp[i + 1][j]));
-        }
-    }
-
-    return maxi;
-}
-
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  return 0;
 }

@@ -1,86 +1,47 @@
-// Problem: Sorted matrix
+//
+// Problem: Sort a Matrix
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+vector<vector<int>> solve(vector<vector<int>> mat) {
+  vector<vector<int>> ans;
 
-#define ll long long
+  vector<int> res;
+  int n = mat.size();
 
-vector<vector<int>> solve(int, vector<vector<int>>);
-void printArray(string, vector<int>, int);
-
-int main()
-{
-    vector<vector<int>> matrix = {{10, 20, 30, 40},
-                                  {15, 25, 35, 45},
-                                  {27, 29, 37, 48},
-                                  {32, 33, 39, 50}};
-
-    cout << "INPUT(s):" << endl;
-    for (int i = 0, n = matrix.size(); i < n; i++)
-    {
-        if (i == 0)
-        {
-            printArray("matrix =", matrix[i], matrix[i].size());
-        }
-        else
-        {
-            printArray("        ", matrix[i], matrix[i].size());
-        }
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      res.push_back(mat[i][j]);
     }
+  }
 
-    vector<vector<int>> ans = solve(matrix.size(), matrix);
+  sort(res.begin(), res.end());
 
-    cout << "OUTPUT(s):" << endl;
-    for (int i = 0; i < ans.size(); i++)
-    {
-        if (i == 0)
-        {
-            printArray("ans =", ans[i], ans[i].size());
-        }
-        else
-        {
-            printArray("     ", ans[i], ans[i].size());
-        }
-    }
-
-    return 0;
-}
-
-vector<vector<int>> solve(int n, vector<vector<int>> matrix)
-{
+  for (int i = 0; i < n; i++) {
     vector<int> v;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            v.push_back(matrix[i][j]);
-        }
+
+    for (int j = 0; j < n; j++) {
+      v.push_back(res[i * n + j]);
     }
 
-    sort(v.begin(), v.end());
+    ans.push_back(v);
+  }
 
-    vector<vector<int>> V;
-    vector<int> tmp;
-    for (int i = 0; i < n; i++)
-    {
-        tmp.clear();
-        for (int j = 0; j < n; j++)
-        {
-            tmp.push_back(v[i * n + j]);
-        }
-        V.push_back(tmp);
-    }
-
-    return V;
+  return ans;
 }
 
-void printArray(string s, vector<int> v, int n)
-{
-    cout << "\t" << s << " { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << v[i] << ", ";
-    }
-    cout << "}" << endl;
+int main() {
+  vector<vector<int>> mat = {
+      {10, 20, 30, 40}, {15, 25, 35, 45}, {27, 29, 37, 48}, {32, 33, 39, 50}};
+
+  cout << "INPUT(s):" << endl;
+  printMatrix(mat, "  mat = ");
+
+  vector<vector<int>> ans = solve(mat);
+
+  cout << "OUTPUT(s):" << endl;
+  printMatrix(ans, "  ans = ");
+
+  return 0;
 }

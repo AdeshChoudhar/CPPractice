@@ -1,55 +1,43 @@
-// Problem: Move all negative numbers to beginning and positive to end with constant extra space
+//
+// Problem: Move all negative elements to end
+//
 
-#include <bits/stdc++.h>
+#include "../../utils/utils.h"
 
-using namespace std;
+void solve(vector<int> &arr) {
+  vector<int> pos, neg;
 
-void solve(int[], int);
-void printArray(string, int[], int);
+  for (int x : arr) {
+    if (x >= 0) {
+      pos.push_back(x);
+    } else {
+      neg.push_back(x);
+    }
+  }
 
-int main()
-{
-    int arr[] = {-1, 2, -3, 4, 5, 6, -7, 8, 9};
-    int n = sizeof(arr) / sizeof(arr[0]);
+  int idx = 0;
 
-    cout << "INPUT(s):" << endl;
-    printArray("arr", arr, n);
+  for (int x : pos) {
+    arr[idx] = x;
+    idx += 1;
+  }
 
-    solve(arr, n);
-
-    cout << "OUTPUT(s):" << endl;
-    printArray("arr", arr, n);
-
-    return 0;
+  for (int x : neg) {
+    arr[idx] = x;
+    idx += 1;
+  }
 }
 
-void solve(int arr[], int n)
-{
-    int left = 0, right = n - 1;
+int main() {
+  vector<int> arr = {1, -1, 3, 2, -7, -5, 11, 6};
 
-    while (left <= right)
-    {
-        if (arr[left] < 0)
-        {
-            left++;
-        }
-        else if (arr[left] > 0 && arr[right] < 0)
-        {
-            swap(arr[left], arr[right]);
-        }
-        else if (arr[right] > 0)
-        {
-            right--;
-        }
-    }
-}
+  cout << "INPUT(s):" << endl;
+  printVector(arr, "  arr = ");
 
-void printArray(string s, int arr[], int n)
-{
-    cout << "\t" << s << " = { ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << ", ";
-    }
-    cout << "}" << endl;
+  solve(arr);
+
+  cout << "OUTPUT(s):" << endl;
+  printVector(arr, "  arr = ");
+
+  return 0;
 }
