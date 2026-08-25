@@ -4,17 +4,16 @@
 
 #include "../../utils/utils.h"
 
-int solve(vector<int> &arr, int k) {
+int solve(vector<int>& arr, int k) {
   int ans;
 
   sort(arr.begin(), arr.end());
 
   ans = arr.back() - arr.front();
 
-  int l = arr.front() + k, r = arr.back() - k;
   for (int i = 0, n = arr.size(); i < (n - 1); i++) {
-    int mnm = min(l, arr[i + 1] - k);
-    int mxm = max(r, arr[i] + k);
+    int mnm = min(arr.front() + k, arr[i + 1] - k);
+    int mxm = max(arr.back() - k, arr[i] + k);
     if (mnm >= 0) {
       ans = min(ans, mxm - mnm);
     }

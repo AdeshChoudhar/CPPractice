@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-int solve(vector<int> &arr, int x) {
+int solve(vector<int>& arr, int x) {
   int ans = INT_MAX;
 
   int n = arr.size(), sum = 0, i = 0;

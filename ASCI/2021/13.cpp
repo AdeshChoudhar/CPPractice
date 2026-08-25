@@ -1,10 +1,10 @@
 //
-// Problem: Karatsuba Algorithm
+// Problem: Multiply Two Strings
 //
 
 #include "../../utils/utils.h"
 
-int makeEqualLengths(string &A, string &B) {
+int makeEqualLengths(string& A, string& B) {
   int res;
 
   int n1 = A.length(), n2 = B.length();
@@ -19,7 +19,7 @@ int makeEqualLengths(string &A, string &B) {
   return res;
 }
 
-string addBitStrings(string &A, string &B) {
+string addBitStrings(string& A, string& B) {
   string res;
 
   int rem = 0, n = makeEqualLengths(A, B);

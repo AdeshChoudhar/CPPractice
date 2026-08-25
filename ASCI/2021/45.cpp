@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-int kSmallestUtil(vector<vector<int>> &mat, int mid) {
+int kSmallestUtil(vector<vector<int>>& mat, int mid) {
   int res = 0;
 
   for (int i = 0, n = mat.size(); i < n; i++) {
@@ -23,7 +23,7 @@ int kSmallestUtil(vector<vector<int>> &mat, int mid) {
   return res;
 }
 
-int solve(vector<vector<int>> &mat, int k) {
+int solve(vector<vector<int>>& mat, int k) {
   int ans;
 
   int n = mat.size(), l = mat[0][0], r = mat[n - 1][n - 1];
@@ -48,7 +48,7 @@ int main() {
   int k = 3;
 
   cout << "INPUT(s):" << endl;
-  printMatrix(mat, "mat = ");
+  printMatrix(mat, "  mat = ");
   cout << "  k = " << k << endl;
 
   int ans = solve(mat, k);

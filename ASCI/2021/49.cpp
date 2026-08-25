@@ -4,10 +4,11 @@
 
 #include "../../utils/utils.h"
 
-string solve(string &s) {
+string solve(string& s) {
   string ans;
 
   unordered_map<char, int> um;
+
   for (auto x : s) {
     if (um[x] == 0) {
       ans.push_back(x);

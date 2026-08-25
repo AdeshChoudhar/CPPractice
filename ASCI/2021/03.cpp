@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-int solve(vector<int> &v, int k) {
+int solve(vector<int>& v, int k) {
   int ans;
 
   sort(v.begin(), v.end());

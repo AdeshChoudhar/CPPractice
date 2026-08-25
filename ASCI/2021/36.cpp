@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-double solve(vector<int> &a, vector<int> &b) {
+double solve(vector<int>& a, vector<int>& b) {
   double ans = 0;
 
   int n1 = a.size(), n2 = b.size();

@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-void solve(vector<int> &arr) {
+void solve(vector<int>& arr) {
   for (int i = 0, n = arr.size(); i < (n / 2); i++) {
     swap(arr[i], arr[n - 1 - i]);
   }

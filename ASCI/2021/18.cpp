@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-int solve(vector<int> &arr, int target) {
+int solve(vector<int>& arr, int target) {
   int ans = 0;
 
   unordered_map<int, int> um;

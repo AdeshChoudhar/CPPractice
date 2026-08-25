@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-int solve(vector<vector<int>> &mat) {
+int solve(vector<vector<int>>& mat) {
   int ans = 0;
 
   int m = mat.size(), n = mat[0].size();
@@ -34,7 +34,7 @@ int main() {
       {2, 1, 4, 3}, {1, 2, 3, 2}, {3, 6, 2, 3}, {5, 2, 5, 3}};
 
   cout << "INPUT(s):" << endl;
-  printMatrix(mat, "mat = ");
+  printMatrix(mat, "  mat = ");
 
   int ans = solve(mat);
 

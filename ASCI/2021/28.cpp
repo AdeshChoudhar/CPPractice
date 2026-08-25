@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-bool solve(vector<int> &arr, int target) {
+bool solve(vector<int>& arr, int target) {
   bool ans = false;
 
   sort(arr.begin(), arr.end());

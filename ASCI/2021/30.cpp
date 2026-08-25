@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-int solve(vector<int> &a, int m) {
+int solve(vector<int>& a, int m) {
   int ans = INT_MAX;
 
   sort(a.begin(), a.end());
@@ -15,6 +15,7 @@ int solve(vector<int> &a, int m) {
 
   return ans;
 }
+
 int main() {
   vector<int> a = {3, 4, 1, 9, 56, 7, 9, 12};
   int m = 5;

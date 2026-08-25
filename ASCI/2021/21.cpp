@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-bool solve(vector<int> &arr) {
+bool solve(vector<int>& arr) {
   bool ans;
 
   set<int> s = {0};

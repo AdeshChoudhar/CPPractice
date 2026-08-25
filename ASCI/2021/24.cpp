@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-int solve(vector<int> &arr) {
+int solve(vector<int>& arr) {
   int ans = 1;
 
   set<int> s(arr.begin(), arr.end());

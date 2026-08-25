@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-bool solve(vector<int> &a, vector<int> &b) {
+bool solve(vector<int>& a, vector<int>& b) {
   bool ans = true;
 
   unordered_map<int, int> um;

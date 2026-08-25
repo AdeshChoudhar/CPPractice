@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-void solve(vector<int> &arr) {
+void solve(vector<int>& arr) {
   int low = 0, mid = 0, hih = arr.size() - 1;
   while (mid <= hih) {
     if (arr[mid] == 0) {

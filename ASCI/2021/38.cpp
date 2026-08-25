@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-bool solve(vector<vector<int>> &mat, int x) {
+bool solve(vector<vector<int>>& mat, int x) {
   bool ans = false;
 
   int r = mat.size(), c = mat[0].size(), i = 0, j = c - 1;
@@ -21,6 +21,7 @@ bool solve(vector<vector<int>> &mat, int x) {
 
   return ans;
 }
+
 int main() {
   vector<vector<int>> mat = {{3, 30, 38}, {20, 52, 54}, {35, 60, 69}};
   int x = 62;

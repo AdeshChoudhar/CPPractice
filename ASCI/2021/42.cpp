@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-int maxAreaUtil(vector<int> &v) {
+int maxAreaUtil(vector<int>& v) {
   int res = 0;
 
   stack<int> s;
@@ -22,7 +22,7 @@ int maxAreaUtil(vector<int> &v) {
     }
   }
 
-  while (s.empty() == false) {
+  while (!s.empty()) {
     top = s.top();
     s.pop();
     mxm = v[top] * (s.empty() ? i : i - s.top() - 1);
@@ -32,7 +32,7 @@ int maxAreaUtil(vector<int> &v) {
   return res;
 }
 
-int solve(vector<vector<int>> &mat) {
+int solve(vector<vector<int>>& mat) {
   int ans = 0;
 
   int mxm = 0;

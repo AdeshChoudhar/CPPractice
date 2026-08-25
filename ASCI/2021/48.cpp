@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-bool solve(string &s) {
+bool solve(string& s) {
   bool ans = true;
 
   for (int i = 0, n = s.size(); i < (n / 2); i++) {

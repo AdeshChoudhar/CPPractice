@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-double solve(vector<int> &arr) {
+double solve(vector<int>& arr) {
   double ans;
 
   sort(arr.begin(), arr.end());

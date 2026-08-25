@@ -19,7 +19,7 @@ bool isPalinArrayUtil(int num) {
   return res;
 }
 
-bool solve(vector<int> &arr) {
+bool solve(vector<int>& arr) {
   bool ans = true;
 
   for (int i = 0, n = arr.size(); (i < n) && ans; i++) {

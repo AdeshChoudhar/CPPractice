@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-int maxProfitUtil(vector<int> &arr, vector<vector<vector<int>>> &dp, int idx,
+int maxProfitUtil(vector<int>& arr, vector<vector<vector<int>>>& dp, int idx,
                   int cnt, int buy) {
   int res = 0;
 
@@ -33,7 +33,7 @@ int maxProfitUtil(vector<int> &arr, vector<vector<vector<int>>> &dp, int idx,
   return res;
 }
 
-int solve(vector<int> &arr) {
+int solve(vector<int>& arr) {
   int ans = 0;
 
   vector<vector<vector<int>>> dp(

@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-int solve(vector<int> &arr, int k) {
+int solve(vector<int>& arr, int k) {
   int ans;
 
   int cnt = 0, n = arr.size();
@@ -22,6 +22,7 @@ int solve(vector<int> &arr, int k) {
   }
 
   ans = len;
+
   for (int i = 0, j = cnt; j < n; i++, j++) {
     if (arr[i] > k) {
       len -= 1;

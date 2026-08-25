@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-int solve(vector<vector<int>> &mat) {
+int solve(vector<vector<int>>& mat) {
   int ans = INT_MIN;
 
   int n = mat.size(), mxm;

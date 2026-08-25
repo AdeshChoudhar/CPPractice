@@ -4,11 +4,11 @@
 
 #include "../../utils/utils.h"
 
-int solve(vector<int> &arr) {
-  int ans = 0;
+int solve(vector<int>& arr) {
+  int ans = INT_MIN;
 
   int mxm = 0;
-  for (int x : arr) {
+  for (auto x : arr) {
     mxm = mxm + x;
     ans = max(ans, mxm);
     mxm = max(0, mxm);

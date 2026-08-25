@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-string solve(string &s) {
+string solve(string& s) {
   string ans(s.rbegin(), s.rend());
   return ans;
 }

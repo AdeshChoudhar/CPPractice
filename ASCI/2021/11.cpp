@@ -4,11 +4,11 @@
 
 #include "../../utils/utils.h"
 
-int solve(vector<int> &arr, int k) {
+int solve(vector<int>& arr, int k) {
   int ans;
 
   unordered_map<int, int> um;
-  for (int x : arr) {
+  for (auto x : arr) {
     um[x] += 1;
   }
 

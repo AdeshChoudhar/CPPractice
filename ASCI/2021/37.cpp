@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-vector<int> solve(vector<vector<int>> &mat) {
+vector<int> solve(vector<vector<int>>& mat) {
   vector<int> ans;
 
   int row = mat.size(), col = mat[0].size();
@@ -43,6 +43,7 @@ vector<int> solve(vector<vector<int>> &mat) {
 
   return ans;
 }
+
 int main() {
   vector<vector<int>> mat = {
       {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};

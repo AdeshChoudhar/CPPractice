@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-int solve(vector<vector<int>> &mat) {
+int solve(vector<vector<int>>& mat) {
   int ans;
 
   vector<int> v;

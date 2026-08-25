@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-void factorialUtil(vector<int> &v, int n) {
+void factorialUtil(vector<int>& v, int n) {
   if ((n == 0) || (n == 1)) {
     return;
   }
@@ -41,7 +41,7 @@ int main() {
   vector<int> ans = solve(n);
 
   cout << "OUTPUT(s):" << endl;
-  printVector(ans, " ans =");
+  printVector(ans, "  ans = ");
 
   return 0;
 }

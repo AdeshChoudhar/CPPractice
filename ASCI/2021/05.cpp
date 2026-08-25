@@ -4,10 +4,10 @@
 
 #include "../../utils/utils.h"
 
-void solve(vector<int> &arr) {
+void solve(vector<int>& arr) {
   vector<int> pos, neg;
 
-  for (int x : arr) {
+  for (auto x : arr) {
     if (x >= 0) {
       pos.push_back(x);
     } else {
@@ -17,12 +17,12 @@ void solve(vector<int> &arr) {
 
   int idx = 0;
 
-  for (int x : pos) {
+  for (auto x : pos) {
     arr[idx] = x;
     idx += 1;
   }
 
-  for (int x : neg) {
+  for (auto x : neg) {
     arr[idx] = x;
     idx += 1;
   }

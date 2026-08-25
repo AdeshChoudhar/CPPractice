@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-void solve(vector<int> &a, vector<int> &b) {
+void solve(vector<int>& a, vector<int>& b) {
   int m = a.size(), n = b.size();
   for (int i = m - 1, j = 0; (i >= 0) && (j < n);) {
     if (a[i] <= b[j]) {

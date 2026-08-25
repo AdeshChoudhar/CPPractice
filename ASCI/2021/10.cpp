@@ -4,7 +4,7 @@
 
 #include "../../utils/utils.h"
 
-int solve(vector<int> &arr) {
+int solve(vector<int>& arr) {
   int ans = 0;
 
   int s = 0, e = 0;
@@ -14,12 +14,12 @@ int solve(vector<int> &arr) {
       s = e;
       ans += 1;
       if (e >= (n - 1)) {
-        break;
+        return ans;
       }
     }
   }
 
-  ans = (ans == 0) ? -1 : ans;
+  ans = -1;
 
   return ans;
 }

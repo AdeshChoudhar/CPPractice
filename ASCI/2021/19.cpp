@@ -4,16 +4,16 @@
 
 #include "../../utils/utils.h"
 
-vector<int> solve(vector<int> &a, vector<int> &b) {
+vector<int> solve(vector<int>& a, vector<int>& b) {
   vector<int> ans;
 
   unordered_map<int, int> um;
 
-  for (int x : a) {
+  for (auto x : a) {
     um[x] += 1;
   }
 
-  for (int x : b) {
+  for (auto x : b) {
     if (um[x] > 0) {
       ans.push_back(x);
       um[x] -= 1;

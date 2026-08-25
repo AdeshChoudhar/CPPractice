@@ -4,14 +4,14 @@
 
 #include "../../utils/utils.h"
 
-struct cmp {
-  bool operator()(vector<int> a, vector<int> b) const { return a[0] < b[0]; }
-};
+bool cmp(vector<int> a, vector<int> b) {
+  return a[0] < b[0];
+}
 
-vector<vector<int>> solve(vector<vector<int>> &arr) {
+vector<vector<int>> solve(vector<vector<int>>& arr) {
   vector<vector<int>> ans;
 
-  sort(arr.begin(), arr.end(), cmp());
+  sort(arr.begin(), arr.end(), cmp);
 
   for (int i = 0, n = arr.size(); i < n; i++) {
     int beg = arr[i][0], end = arr[i][1];
@@ -36,7 +36,7 @@ int main() {
   cout << "INPUT(s):" << endl;
   cout << "  arr = {\n";
 
-  for (auto x : arr) {
+  for (vector<int> x : arr) {
     printVector(x, "    ");
   }
 
@@ -47,7 +47,7 @@ int main() {
   cout << "OUTPUT(s):" << endl;
   cout << "  ans = {\n";
 
-  for (auto x : ans) {
+  for (vector<int> x : ans) {
     printVector(x, "    ");
   }
 

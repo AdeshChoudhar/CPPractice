@@ -4,20 +4,20 @@
 
 #include "../../utils/utils.h"
 
-vector<int> solve(vector<int> &a, vector<int> &b) {
+vector<int> solve(vector<int>& a, vector<int>& b) {
   vector<int> ans;
 
   unordered_set<int> us;
 
-  for (int x : a) {
+  for (auto x : a) {
     us.insert(x);
   }
 
-  for (int x : b) {
+  for (auto x : b) {
     us.insert(x);
   }
 
-  for (int x : us) {
+  for (auto x : us) {
     ans.push_back(x);
   }
 
