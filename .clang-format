@@ -1,0 +1,51 @@
+BasedOnStyle: LLVM
+
+# 1. BRACING & INDENTATION
+IndentWidth: 2
+TabWidth: 2
+UseTab: Never
+BreakBeforeBraces: Attach
+IndentCaseLabels: false
+AccessModifierOffset: -2
+
+# 2. SPACING & WHITESPACE
+ColumnLimit: 80
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: true
+SpaceBeforeParens: ControlStatementsExceptControlMacros
+SpaceInEmptyParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1
+
+# 3. EXPRESSIONS & PARENTHESES
+BreakStringLiterals: true
+AlwaysBreakTemplateDeclarations: Yes
+SpacesBeforeTrailingComments: 2
+AlignTrailingComments: true
+SpaceAfterCStyleCast: false
+SpaceBeforeAssignmentOperators: true
+Standard: Cpp11
+PointerAlignment: Left
+
+# 4. VARIABLE & INIT PATTERNS
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortLoopsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Always
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignConsecutiveMacros: false
+
+# 5. LOOP & FLOW PATTERNS
+ConstructorInitializerIndentWidth: 2
+BreakConstructorInitializers: BeforeColon
+ContinuationIndentWidth: 4
+NamespaceIndentation: None
+FixNamespaceComments: false
+SortIncludes: false
+ReflowComments: false
+SpacesInAngles: false
+SpacesInCStyleCastParentheses: false
+DerivePointerAlignment: false
