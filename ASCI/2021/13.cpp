@@ -25,7 +25,7 @@ string addBitStrings(string& A, string& B) {
   int rem = 0, n = makeEqualLengths(A, B);
   for (int i = n - 1; i >= 0; i--) {
     int sum = (A[i] - '0') + (B[i] - '0') + rem;
-    res.push_back((sum % 2) + '0');
+    res.push_back((sum & 1) + '0');
     rem = sum / 2;
   }
 

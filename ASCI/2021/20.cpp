@@ -18,7 +18,7 @@ void solve(vector<int>& arr) {
   int i = 0, pi = 0, pn = pos.size(), ni = 0, nn = neg.size();
 
   for (; (pi < pn) && (ni < nn); i++) {
-    if ((i % 2) == 0) {
+    if ((i & 1) == 0) {
       arr[i] = pos[pi];
       pi += 1;
     } else {

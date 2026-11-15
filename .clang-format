@@ -1,11 +1,13 @@
 BasedOnStyle: LLVM
 
 # 1. BRACING & INDENTATION
+LineEnding: LF
+InsertNewlineAtEOF: true
+AlignAfterOpenBracket: true
 IndentWidth: 2
 TabWidth: 2
 UseTab: Never
 BreakBeforeBraces: Attach
-IndentCaseLabels: false
 AccessModifierOffset: -2
 
 # 2. SPACING & WHITESPACE
@@ -13,39 +15,37 @@ ColumnLimit: 80
 BreakBeforeBinaryOperators: None
 BreakBeforeTernaryOperators: true
 SpaceBeforeParens: ControlStatementsExceptControlMacros
-SpaceInEmptyParentheses: false
-SpacesInParentheses: false
-SpacesInSquareBrackets: false
-KeepEmptyLinesAtTheStartOfBlocks: false
+SpacesInParens: Never
+KeepEmptyLines:
+  AtStartOfBlock: false
 MaxEmptyLinesToKeep: 1
 
 # 3. EXPRESSIONS & PARENTHESES
 BreakStringLiterals: true
-AlwaysBreakTemplateDeclarations: Yes
+BreakTemplateDeclarations: Yes
 SpacesBeforeTrailingComments: 2
-AlignTrailingComments: true
-SpaceAfterCStyleCast: false
-SpaceBeforeAssignmentOperators: true
-Standard: Cpp11
+Standard: c++17
 PointerAlignment: Left
 
 # 4. VARIABLE & INIT PATTERNS
-AllowShortFunctionsOnASingleLine: Empty
+AllowShortFunctionsOnASingleLine:
+  Empty: true
+  Inline: false
+  Other: false
 AllowShortLoopsOnASingleLine: false
-AllowShortIfStatementsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: Never
 AllowShortBlocksOnASingleLine: Always
-AlignConsecutiveAssignments: false
-AlignConsecutiveDeclarations: false
-AlignConsecutiveMacros: false
+AlignConsecutiveAssignments:
+  Enabled: false
+  PadOperators: false
+AlignConsecutiveDeclarations:
+  Enabled: false
+  AlignFunctionDeclarations: false
 
 # 5. LOOP & FLOW PATTERNS
 ConstructorInitializerIndentWidth: 2
-BreakConstructorInitializers: BeforeColon
 ContinuationIndentWidth: 4
-NamespaceIndentation: None
 FixNamespaceComments: false
-SortIncludes: false
-ReflowComments: false
-SpacesInAngles: false
-SpacesInCStyleCastParentheses: false
-DerivePointerAlignment: false
+SortIncludes:
+  Enabled: false
+ReflowComments: Always

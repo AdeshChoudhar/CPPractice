@@ -7,7 +7,7 @@
 bool solve(string& s) {
   bool ans = true;
 
-  for (int i = 0, n = s.size(); i < (n / 2); i++) {
+  for (int i = 0, n = s.length(); i < (n / 2); i++) {
     if (s[i] != s[n - 1 - i]) {
       ans = false;
       return ans;

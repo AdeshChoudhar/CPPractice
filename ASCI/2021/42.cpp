@@ -36,8 +36,8 @@ int solve(vector<vector<int>>& mat) {
   int ans = 0;
 
   int mxm = 0;
-  for (int i = 0; i < mat.size(); i++) {
-    for (int j = 0; j < mat[0].size(); j++) {
+  for (int i = 0, m = mat.size(); i < m; i++) {
+    for (int j = 0, n = mat[0].size(); j < n; j++) {
       if ((i != 0) && (mat[i][j] != 0)) {
         mat[i][j] += mat[i - 1][j];
       }
