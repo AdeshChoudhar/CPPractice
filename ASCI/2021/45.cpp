@@ -44,7 +44,11 @@ int solve(vector<vector<int>>& mat, int k) {
 
 int main() {
   vector<vector<int>> mat = {
-      {16, 28, 60, 64}, {22, 41, 63, 91}, {27, 50, 87, 93}, {36, 78, 87, 94}};
+      {16, 28, 60, 64},
+      {22, 41, 63, 91},
+      {27, 50, 87, 93},
+      {36, 78, 87, 94}
+  };
   int k = 3;
 
   cout << "INPUT(s):" << endl;

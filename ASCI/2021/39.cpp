@@ -29,7 +29,11 @@ int solve(vector<vector<int>>& mat) {
 }
 
 int main() {
-  vector<vector<int>> mat = {{1, 3, 5}, {2, 6, 9}, {3, 6, 9}};
+  vector<vector<int>> mat = {
+      {1, 3, 5},
+      {2, 6, 9},
+      {3, 6, 9}
+  };
 
   cout << "INPUT(s):" << endl;
   printMatrix(mat, "  mat = ");

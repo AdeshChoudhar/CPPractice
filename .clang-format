@@ -1,33 +1,49 @@
 BasedOnStyle: LLVM
 
-# 1. BRACING & INDENTATION
+# 1. BASE
+Standard: c++17
 LineEnding: LF
 InsertNewlineAtEOF: true
-AlignAfterOpenBracket: true
+
+# 2. BRACES & INDENTATION
+BreakBeforeBraces: Attach
 IndentWidth: 2
 TabWidth: 2
 UseTab: Never
-BreakBeforeBraces: Attach
 AccessModifierOffset: -2
+AlignAfterOpenBracket: true
+ContinuationIndentWidth: 4
+ConstructorInitializerIndentWidth: 2
 
-# 2. SPACING & WHITESPACE
-ColumnLimit: 80
-BreakBeforeBinaryOperators: None
-BreakBeforeTernaryOperators: true
+# 3. SPACING & WHITESPACE
 SpaceBeforeParens: ControlStatementsExceptControlMacros
 SpacesInParens: Never
+SpacesBeforeTrailingComments: 2
+
+# 4. BLANK LINES & SEPARATORS
+SeparateDefinitionBlocks: Always
 KeepEmptyLines:
   AtStartOfBlock: false
 MaxEmptyLinesToKeep: 1
 
-# 3. EXPRESSIONS & PARENTHESES
+# 5. COLUMNS & LINE BREAKS
+ColumnLimit: 80
+AlignArrayOfStructures: Right
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: true
 BreakStringLiterals: true
 BreakTemplateDeclarations: Yes
-SpacesBeforeTrailingComments: 2
-Standard: c++17
+
+# 6. ALIGNMENT
+AlignConsecutiveAssignments:
+  Enabled: false
+  PadOperators: false
+AlignConsecutiveDeclarations:
+  Enabled: false
+  AlignFunctionDeclarations: false
 PointerAlignment: Left
 
-# 4. VARIABLE & INIT PATTERNS
+# 7. SHORT STATEMENT RULES
 AllowShortFunctionsOnASingleLine:
   Empty: true
   Inline: false
@@ -35,17 +51,9 @@ AllowShortFunctionsOnASingleLine:
 AllowShortLoopsOnASingleLine: false
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortBlocksOnASingleLine: Always
-AlignConsecutiveAssignments:
-  Enabled: false
-  PadOperators: false
-AlignConsecutiveDeclarations:
-  Enabled: false
-  AlignFunctionDeclarations: false
 
-# 5. LOOP & FLOW PATTERNS
-ConstructorInitializerIndentWidth: 2
-ContinuationIndentWidth: 4
-FixNamespaceComments: false
+# 8. INCLUDES & COMMENTS
 SortIncludes:
-  Enabled: false
+  Enabled: true
+FixNamespaceComments: false
 ReflowComments: Always

@@ -21,7 +21,11 @@ int solve(vector<vector<int>>& arr) {
 
 int main() {
   vector<vector<int>> arr = {
-      {0, 1, 1, 1}, {0, 0, 1, 1}, {1, 1, 1, 1}, {0, 0, 0, 0}};
+      {0, 1, 1, 1},
+      {0, 0, 1, 1},
+      {1, 1, 1, 1},
+      {0, 0, 0, 0}
+  };
 
   cout << "INPUT(s):" << endl;
   printMatrix(arr, "  arr = ");

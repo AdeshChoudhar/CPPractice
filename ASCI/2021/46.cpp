@@ -31,7 +31,11 @@ int solve(vector<vector<int>>& mat) {
 
 int main() {
   vector<vector<int>> mat = {
-      {2, 1, 4, 3}, {1, 2, 3, 2}, {3, 6, 2, 3}, {5, 2, 5, 3}};
+      {2, 1, 4, 3},
+      {1, 2, 3, 2},
+      {3, 6, 2, 3},
+      {5, 2, 5, 3}
+  };
 
   cout << "INPUT(s):" << endl;
   printMatrix(mat, "  mat = ");

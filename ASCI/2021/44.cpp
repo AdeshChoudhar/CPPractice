@@ -40,7 +40,10 @@ vector<vector<int>> solve(vector<vector<int>>& mat) {
 }
 
 int main() {
-  vector<vector<int>> mat = {{1, 2, 3}, {2, 3, 3}};
+  vector<vector<int>> mat = {
+      {1, 2, 3},
+      {2, 3, 3}
+  };
 
   cout << "INPUT(s):" << endl;
   printMatrix(mat, "  mat = ");

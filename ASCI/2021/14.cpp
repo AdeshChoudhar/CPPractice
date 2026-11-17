@@ -31,7 +31,12 @@ vector<vector<int>> solve(vector<vector<int>>& arr) {
 }
 
 int main() {
-  vector<vector<int>> arr = {{1, 3}, {2, 4}, {6, 8}, {9, 10}};
+  vector<vector<int>> arr = {
+      {1,  3},
+      {2,  4},
+      {6,  8},
+      {9, 10}
+  };
 
   cout << "INPUT(s):" << endl;
   cout << "  arr = {\n";
