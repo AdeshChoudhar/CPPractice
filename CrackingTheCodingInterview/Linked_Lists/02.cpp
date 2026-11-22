@@ -7,9 +7,9 @@
 
 Node<int>* solve(Node<int>* head, int k) {
   Node<int>* ans = nullptr;
-  
+
   int cnt = 0;
-  
+
   Node<int>* curr = head;
 
   while (curr != nullptr) {
