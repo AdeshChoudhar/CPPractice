@@ -50,9 +50,7 @@ public:
   LinkedList& operator=(const LinkedList&) = delete;
 
   // Allow move constructor
-  LinkedList(LinkedList&& ll) noexcept : head(ll.head) {
-    ll.head = nullptr;
-  }
+  LinkedList(LinkedList&& ll) noexcept : head(exchange(ll.head, nullptr)) {}
 
   // Allow move assignment
   LinkedList& operator=(LinkedList&& ll) noexcept {
